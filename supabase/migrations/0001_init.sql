@@ -32,11 +32,9 @@ create table public.courses (
   status public.publish_status not null default 'draft',
   hours int check (hours > 0),
   owner_id uuid not null references auth.users (id),
-  enrollment_fee_cents int not null default 0 check (enrollment_fee_cents >= 0),
-  currency char(3) not null default 'EUR',
   cisco_course_ref text,
-  created_at timestamptz not null default now(),
-  check (modality = 'convenio' or enrollment_fee_cents = 0)
+  cisco_matricula text,                     -- la matricula Cisco depende del tipo de curso (descripcion por definir)
+  created_at timestamptz not null default now()
 );
 create table public.activities (
   id uuid primary key default gen_random_uuid(),
@@ -54,6 +52,9 @@ create table public.groups (
   center_name text not null check (char_length(center_name) between 2 and 160),
   code_hash text not null unique,           -- sha256 del codigo; el codigo en claro no se guarda
   max_seats int check (max_seats > 0),
+  -- Matricula simbolica fijada en el convenio: 0 (sin matricula) o de 1 EUR (100) a 5 EUR (500) por estudiante
+  enrollment_fee_cents int not null default 0 check (enrollment_fee_cents = 0 or enrollment_fee_cents between 100 and 500),
+  currency char(3) not null default 'EUR',
   expires_at timestamptz,
   created_at timestamptz not null default now()
 );
@@ -155,7 +156,7 @@ begin
     if seats >= g.max_seats then raise exception 'Grupo completo' using errcode = 'P0001'; end if;
   end if;
   insert into public.enrollments (course_id, group_id, user_id, status)
-  values (c.id, g.id, auth.uid(), case when c.enrollment_fee_cents > 0 then 'pending_payment' else 'active' end)
+  values (c.id, g.id, auth.uid(), case when g.enrollment_fee_cents > 0 then 'pending_payment' else 'active' end)
   on conflict (course_id, user_id) do nothing
   returning id into eid;
   return eid;

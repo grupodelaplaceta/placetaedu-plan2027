@@ -37,13 +37,15 @@ test('los enlaces internos apuntan a archivos que existen', () => {
   }
 });
 
-test('hay portada por curso y los cursos aparecen en el catalogo', () => {
+test('cada curso tiene portada plana con la roseta original y sale en el catalogo', () => {
   const courses = JSON.parse(readFileSync(join(ROOT, 'src/data/courses.json'), 'utf8'));
   const cat = html('cursos.html');
   for (const c of courses) {
-    assert.ok(existsSync(join(DIST, 'img/covers', c.slug + '.svg')), c.slug);
     assert.ok(cat.includes(`id="${c.slug}"`), c.slug);
+    assert.match(cat, new RegExp(`id="${c.slug}"[\\s\\S]*?class="cover k-${c.tone}"`), c.slug);
   }
+  assert.ok(existsSync(join(DIST, 'img/rosette-edu.png')));
+  assert.match(readFileSync(join(DIST, 'css/app.css'), 'utf8'), /rosette-edu\.png/);
   assert.ok(courses.filter((c) => c.featured).length >= 3);
 });
 
@@ -100,4 +102,46 @@ test('no hay secretos versionados en .env.example', () => {
     const v = l.split('=')[1] || '';
     assert.ok(v.length < 60 && !/^eyJ/.test(v), l);
   }
+});
+
+test('colores planos: la hoja de estilos no usa degradados ni sombras', () => {
+  assert.ok(!/gradient|box-shadow|backdrop-filter|color-mix/.test(readFileSync(join(DIST, 'css/app.css'), 'utf8')));
+});
+
+test('centro de ayuda multipagina con navegacion y respuestas enlazables', () => {
+  const ayuda = pages.filter((f) => f.startsWith('ayuda/'));
+  assert.ok(ayuda.length >= 8);
+  for (const f of ayuda) assert.match(html(f), /class="ayuda-nav"/, f);
+  assert.match(html('ayuda/matricula-y-precios.html'), /1 € a 5 € por estudiante/);
+  assert.match(html('ayuda/matricula-y-precios.html'), /id="codigo"/);
+  assert.match(html('index.html'), /ayuda\/index\.html/);
+});
+
+test('precios: convenio de 1 a 5 euros por estudiante y Cisco segun tipo de curso', () => {
+  assert.match(html('cursos.html'), /de 1 € a 5 € por estudiante/);
+  assert.match(html('cursos.html'), /depende del tipo de curso/);
+  assert.match(html('legal/condiciones.html'), /entre 1 € y 5 €/);
+});
+
+test('el logo de Cisco se muestra con su archivo original y alt', () => {
+  assert.ok(existsSync(join(DIST, 'img/cisco.png')));
+  assert.match(html('index.html'), /alt="Cisco Networking Academy"/);
+});
+
+test('portada: muestra de certificado y PDF de ejemplo valido', () => {
+  assert.match(html('index.html'), /class="cert"/);
+  const f = join(DIST, 'ejemplo/certificado-ejemplo.pdf');
+  const b = readFileSync(f), s = b.toString('latin1');
+  assert.ok(s.startsWith('%PDF-1.4') && s.trimEnd().endsWith('%%EOF'));
+  const start = Number(s.match(/startxref\n(\d+)/)[1]);
+  assert.equal(s.slice(start, start + 4), 'xref');
+  const n = Number(s.match(/xref\n0 (\d+)/)[1]);
+  const offs = [...s.slice(start).matchAll(/(\d{10}) 00000 n/g)].map((m) => Number(m[1]));
+  assert.equal(offs.length, n - 1);
+  offs.forEach((o, i) => assert.equal(s.slice(o, o + String(i + 1).length + 6), `${i + 1} 0 obj`));
+});
+
+test('migracion: matricula simbolica por grupo entre 100 y 500 centimos', () => {
+  const sql = readFileSync(join(ROOT, 'supabase/migrations/0001_init.sql'), 'utf8');
+  assert.match(sql, /enrollment_fee_cents int not null default 0 check \(enrollment_fee_cents = 0 or enrollment_fee_cents between 100 and 500\)/);
 });

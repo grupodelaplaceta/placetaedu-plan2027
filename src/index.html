@@ -5,9 +5,17 @@
       <h1>Aprende el mundo digital con quien te acompaña.</h1>
       <p class="lead">Cursos con teoría, vídeo y laboratorios prácticos. Empieza gratis cuando quieras o únete con el código de tu centro y consigue un certificado oficial.</p>
       <div class="cta"><a class="btn main" href="{{root}}cursos.html">Ver los cursos</a><a class="btn out" href="{{root}}acceder.html">Acceder con Google o PlacetaID</a></div>
-      <ul class="pruebas"><li>Cursos gratuitos siempre disponibles</li><li>Certificado en PDF</li><li>Matrícula Cisco incluida según convenio</li></ul>
+      <ul class="pruebas"><li>Cursos gratuitos siempre disponibles</li><li>Certificado en PDF</li><li>Formación con Cisco Networking Academy</li></ul>
     </div>
     <div class="pila" aria-hidden="true">{{hero_cards}}</div>
+  </div>
+</section>
+
+<section class="aliados" aria-label="Aliado de formación">
+  <div class="wrap">
+    <img class="cisco-logo cisco-l" src="{{root}}img/cisco.png" alt="Cisco Networking Academy" width="520" height="131">
+    <img class="cisco-logo cisco-d" src="{{root}}img/cisco-dark.png" alt="" width="520" height="131">
+    <p>Cursos oficiales de Cisco Networking Academy, con acompañamiento y laboratorios prácticos.</p>
   </div>
 </section>
 
@@ -23,9 +31,9 @@
     <h2>Elige cómo quieres estudiar</h2>
     <p class="sub">Todos los cursos incluyen actividades variadas: teoría, vídeos, imágenes, cuestionarios y laboratorios.</p>
     <div class="tres">
-      <div class="mod"><span class="tag">Gratis</span><h3>Cursos abiertos</h3><p class="big">0 €</p><ul><li>Empieza en cualquier momento</li><li>Avanza a tu ritmo</li><li>Certificado al completarlo</li></ul></div>
-      <div class="mod"><span class="tag conv">Con tu centro</span><h3>Cursos por convenio</h3><p class="big">Matrícula simbólica</p><ul><li>Te unes con el código de inscripción de tu centro</li><li>Acompañamiento de tu instructor</li><li>El importe cubre la puesta en marcha del grupo</li></ul></div>
-      <div class="mod"><span class="tag cisco">Cisco NetAcademy</span><h3>Con matrícula Cisco</h3><p class="big">Incluida según convenio</p><ul><li>Prepara el certificado de Cisco</li><li>Contenidos y laboratorios de referencia</li><li>Certificado expedido por Cisco</li></ul></div>
+      <div class="mod"><span class="tag">Gratis</span><h3>Cursos abiertos</h3><p class="big">0 €</p><ul><li>Empieza en cualquier momento</li><li>Avanza a tu ritmo</li><li>Certificado al completarlo</li></ul><a href="{{root}}ayuda/cursos-y-actividades.html">Cómo funcionan</a></div>
+      <div class="mod"><span class="tag conv">Con tu centro</span><h3>Cursos por convenio</h3><p class="big">De 1 € a 5 €</p><ul><li>Matrícula simbólica por estudiante, fijada en el convenio</li><li>Te unes con el código de inscripción de tu centro</li><li>Acompañamiento de tu instructor</li></ul><a href="{{root}}ayuda/matricula-y-precios.html">Matrícula y precios</a></div>
+      <div class="mod"><img class="cisco-logo cisco-l" src="{{root}}img/cisco.png" alt="Cisco Networking Academy" width="520" height="131" loading="lazy"><img class="cisco-logo cisco-d" src="{{root}}img/cisco-dark.png" alt="" width="520" height="131" loading="lazy"><h3>Con matrícula Cisco</h3><p class="big">Según el curso</p><ul><li>La matrícula Cisco depende del tipo de curso</li><li>Contenidos y laboratorios de referencia</li><li>Certificado de Cisco expedido por Cisco</li></ul><a href="{{root}}ayuda/cisco-networking-academy.html">Sobre los cursos Cisco</a></div>
     </div>
   </div>
 </section>
@@ -43,21 +51,27 @@
 </section>
 
 <section class="sec alt" id="certificados">
-  <div class="wrap dos">
-    <div class="sello"><img src="{{root}}img/seal.png" alt="Sello de Grupo de La Placeta, Plan 2027" width="320" height="327" loading="lazy"></div>
-    <div><h2>Certificados con valor</h2><p class="sub">Cada certificado incluye tu nombre, el curso, las horas y un código de verificación. Si el curso incluye matrícula con Cisco Networking Academy, el certificado de Cisco lo expide Cisco.</p><p class="sub">Los certificados se descargan en PDF desde tu campus.</p></div>
+  <div class="wrap cert-bloque">
+    <div>
+      <h2>Certificados con valor</h2>
+      <p class="sub">Cada certificado lleva tu nombre, el curso, las horas, el sello de Grupo de La Placeta y un código de verificación. Si el curso se prepara con Cisco Networking Academy, el certificado de Cisco lo expide Cisco.</p>
+      <p class="sub"><a class="btn main" href="{{root}}ejemplo/certificado-ejemplo.pdf">Descargar ejemplo en PDF</a></p>
+      <p class="sub"><a href="{{root}}ayuda/certificados.html">Cómo se obtiene un certificado</a></p>
+    </div>
+    {{cert}}
   </div>
 </section>
 
 <section class="sec" id="ayuda">
   <div class="wrap">
-    <h2>Preguntas frecuentes</h2>
-    <div class="faq-lista">
-      <details class="faq"><summary>¿Necesito pagar algo?</summary><p>Los cursos abiertos son gratuitos. Los cursos por convenio con un centro tienen una matrícula simbólica que se indica antes de confirmarla.</p></details>
-      <details class="faq"><summary>¿Cómo me uno al curso de mi centro?</summary><p>Tu instructor te dará un código de inscripción. Lo introduces en tu campus y quedas unido al grupo.</p></details>
-      <details class="faq"><summary>¿Puedo ser instructor y estudiante a la vez?</summary><p>Sí. Un instructor también puede cursar cursos como estudiante con la misma cuenta.</p></details>
-      <details class="faq"><summary>¿Cómo se usan mis datos?</summary><p>Solo los necesarios para darte el servicio. Lo explicamos en la <a href="{{root}}legal/privacidad.html">política de privacidad</a>.</p></details>
-    </div>
+    <div class="cab"><div><h2>Preguntas frecuentes</h2><p class="sub">Las dudas más habituales. En el centro de ayuda hay más.</p></div><a class="btn" href="{{root}}ayuda/index.html">Ir al centro de ayuda</a></div>
+    <ul class="top-q">
+      <li><a href="{{root}}ayuda/matricula-y-precios.html#gratis">¿Necesito pagar algo?</a></li>
+      <li><a href="{{root}}ayuda/matricula-y-precios.html#codigo">¿Cómo me uno al curso de mi centro?</a></li>
+      <li><a href="{{root}}ayuda/cuenta-y-acceso.html#doble-rol">¿Puedo ser instructor y estudiante a la vez?</a></li>
+      <li><a href="{{root}}ayuda/certificados.html#verificar">¿Cómo se verifica un certificado?</a></li>
+      <li><a href="{{root}}ayuda/privacidad-y-menores.html#datos">¿Cómo se usan mis datos?</a></li>
+    </ul>
   </div>
 </section>
 

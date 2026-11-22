@@ -1,9 +1,72 @@
 [
-  {"slug":"fundamentos-de-redes","title":"Fundamentos de redes","summary":"Entiende cómo se conectan los dispositivos e internet y monta tu primera red en un laboratorio práctico.","modality":"cisco","hours":40,"featured":true,"glyph":"network","palette":["#260f5f","#00a6d6"]},
-  {"slug":"ciberseguridad-esencial","title":"Ciberseguridad esencial","summary":"Protege cuentas, dispositivos y datos. Aprende a detectar amenazas habituales y a responder con criterio.","modality":"cisco","hours":30,"featured":true,"glyph":"shield","palette":["#1b0a5e","#6c75ff"]},
-  {"slug":"primeros-pasos-con-ia","title":"Primeros pasos con IA","summary":"Qué es la inteligencia artificial, cómo usarla en tu día a día y cómo comprobar lo que te responde.","modality":"open","hours":8,"featured":true,"glyph":"spark","palette":["#3a1c9a","#8d94ff"]},
-  {"slug":"ofimatica-para-el-dia-a-dia","title":"Ofimática para el día a día","summary":"Documentos, hojas de cálculo y presentaciones para estudiar, trabajar y gestionar tus trámites.","modality":"open","hours":12,"featured":false,"glyph":"doc","palette":["#260f5f","#6c75ff"]},
-  {"slug":"seguridad-digital-basica","title":"Seguridad digital básica","summary":"Contraseñas, privacidad y estafas en línea: hábitos sencillos que te protegen desde hoy.","modality":"open","hours":6,"featured":false,"glyph":"lock","palette":["#2b1180","#5a63f2"]},
-  {"slug":"introduccion-a-la-programacion","title":"Introducción a la programación","summary":"Lógica, variables y bucles con ejercicios guiados. Un curso para tu grupo con acompañamiento del instructor.","modality":"convenio","hours":30,"featured":false,"glyph":"code","palette":["#1b0a5e","#7f5af0"]},
-  {"slug":"competencia-digital-para-el-empleo","title":"Competencia digital para el empleo","summary":"Herramientas, comunicación y búsqueda de oportunidades en entornos digitales reales.","modality":"convenio","hours":20,"featured":false,"glyph":"person","palette":["#260f5f","#4b6bff"]}
+  {
+    "slug": "fundamentos-de-redes",
+    "title": "Fundamentos de redes",
+    "summary": "Entiende cómo se conectan los dispositivos e internet y monta tu primera red en un laboratorio práctico.",
+    "modality": "cisco",
+    "hours": 40,
+    "featured": true,
+    "glyph": "network",
+    "tone": "c"
+  },
+  {
+    "slug": "ciberseguridad-esencial",
+    "title": "Ciberseguridad esencial",
+    "summary": "Protege cuentas, dispositivos y datos. Aprende a detectar amenazas habituales y a responder con criterio.",
+    "modality": "cisco",
+    "hours": 30,
+    "featured": true,
+    "glyph": "shield",
+    "tone": "c"
+  },
+  {
+    "slug": "primeros-pasos-con-ia",
+    "title": "Primeros pasos con IA",
+    "summary": "Qué es la inteligencia artificial, cómo usarla en tu día a día y cómo comprobar lo que te responde.",
+    "modality": "open",
+    "hours": 8,
+    "featured": true,
+    "glyph": "spark",
+    "tone": "a"
+  },
+  {
+    "slug": "ofimatica-para-el-dia-a-dia",
+    "title": "Ofimática para el día a día",
+    "summary": "Documentos, hojas de cálculo y presentaciones para estudiar, trabajar y gestionar tus trámites.",
+    "modality": "open",
+    "hours": 12,
+    "featured": false,
+    "glyph": "doc",
+    "tone": "b"
+  },
+  {
+    "slug": "seguridad-digital-basica",
+    "title": "Seguridad digital básica",
+    "summary": "Contraseñas, privacidad y estafas en línea: hábitos sencillos que te protegen desde hoy.",
+    "modality": "open",
+    "hours": 6,
+    "featured": false,
+    "glyph": "lock",
+    "tone": "d"
+  },
+  {
+    "slug": "introduccion-a-la-programacion",
+    "title": "Introducción a la programación",
+    "summary": "Lógica, variables y bucles con ejercicios guiados. Un curso para tu grupo con acompañamiento del instructor.",
+    "modality": "convenio",
+    "hours": 30,
+    "featured": false,
+    "glyph": "code",
+    "tone": "b"
+  },
+  {
+    "slug": "competencia-digital-para-el-empleo",
+    "title": "Competencia digital para el empleo",
+    "summary": "Herramientas, comunicación y búsqueda de oportunidades en entornos digitales reales.",
+    "modality": "convenio",
+    "hours": 20,
+    "featured": false,
+    "glyph": "person",
+    "tone": "a"
+  }
 ]

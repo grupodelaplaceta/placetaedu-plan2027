@@ -10,6 +10,7 @@ const REGLAS = [
   [/target\s*=\s*["']_blank["'](?![^>]*noopener)/i, 'Art. 17: target=_blank sin rel=noopener'],
   [/(src|href)\s*=\s*["']http:\/\//i, 'Art. 17: recurso http (contenido mixto)'],
   [/(src|href)\s*=\s*["']https?:\/\/(fonts\.(googleapis|gstatic)|[^"']*google-analytics|[^"']*googletagmanager)/i, 'Art. 26: recurso de tercero no autorizado (RGPD)'],
+  [/gradient\(|box-shadow|text-shadow|backdrop-filter|color-mix\(|filter:\s*blur/i, 'Marca: solo colores planos (sin degradados, sombras ni difuminados)'],
   [/(service_role|SUPABASE_SERVICE_ROLE_KEY)\s*[:=]\s*["'][^"']{8,}/, 'Art. 21: posible secreto']
 ];
 const EXT = new Set(['.html', '.css', '.mjs', '.js', '.json', '.svg']);

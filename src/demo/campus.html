@@ -1,0 +1,50 @@
+<!--title: Campus virtual (demostración) · PlacetaEDU | desc: Vista de demostración del campus virtual de PlacetaEDU con datos ficticios. | robots: noindex -->
+<div class="camp">
+  <aside class="side" aria-label="Campus">
+    <div class="yo"><span class="av" aria-hidden="true">MP</span><span><b>Marta Puig</b><br><span class="mut">Estudiante</span></span></div>
+    <a href="#inicio-c" aria-current="page">Inicio</a><a href="#mis-cursos">Mis cursos</a><a href="#mis-certificados">Certificados</a><a href="#grupos">Mis grupos</a><a href="{{root}}ayuda/index.html">Ayuda</a>
+  </aside>
+  <div class="pm">
+    <p class="aviso">Demostración con datos ficticios. El acceso real con Google o PlacetaID llegará con el campus autenticado.</p>
+
+    <section class="pm" id="r-est" aria-labelledby="h-est">
+      <p class="vl">VISTA DE ESTUDIANTE</p>
+      <h1 id="h-est">Hola, Marta</h1>
+      <div class="stats" id="inicio-c"><div class="stat s1"><b>2</b><span>Cursos en marcha</span></div><div class="stat s2"><b>1</b><span>Certificado</span></div><div class="stat s3"><b>40 %</b><span>Progreso en redes</span></div></div>
+
+      <div class="cont">
+        <div class="cover k-c" aria-hidden="true"><svg class="glyph" viewBox="0 0 100 100" width="96" height="96" aria-hidden="true" focusable="false"><circle cx="50" cy="22" r="9"/><circle cx="20" cy="74" r="9"/><circle cx="80" cy="74" r="9"/><path d="M50 31 22 66M50 31l28 35M29 74h42"/></svg><span class="rosette"></span></div>
+        <div class="info"><span class="tag cisco">Cisco NetAcademy</span><h2>Fundamentos de redes</h2>
+          <div class="bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="Progreso 40 %"><i class="w40"></i></div>
+          <p class="mut">4 de 10 actividades · Siguiente: laboratorio «Tu primera red»</p><p><a class="btn main sm" href="#mis-cursos" data-toast="Abriendo el laboratorio…">Continuar</a></p></div>
+      </div>
+
+      <div class="panel" id="mis-cursos"><h2>Fundamentos de redes</h2><p class="mut">Todo tipo de actividad en un mismo curso.</p>
+        <ul class="act"><li class="done"><span class="k">Teoría</span>Qué es una red<span class="d">Hecho</span></li><li class="done"><span class="k">Vídeo</span>Cómo viaja un mensaje<span class="d">Hecho</span></li><li class="done"><span class="k">Imágenes</span>Topologías de red<span class="d">Hecho</span></li><li class="done"><span class="k">Cuestionario</span>Conceptos básicos<span class="d">Hecho</span></li><li><span class="k">Laboratorio</span>Tu primera red en Packet Tracer<span class="d">Siguiente</span></li></ul></div>
+
+      <div class="panel"><h2>Unirme a un grupo</h2><p class="mut">Escribe el código que te ha dado tu centro.</p>
+        <div class="code"><input id="cod" aria-label="Código de inscripción" placeholder="Ej. IES-4K7Q2" autocomplete="off"><button type="button" class="btn main sm" id="join">Unirme</button></div></div>
+
+      <div class="panel" id="mis-certificados"><h2>Mis certificados</h2>
+        <table class="t"><tr><th>Curso</th><th>Fecha</th><th>Estado</th><th><span class="vh">Descarga</span></th></tr>
+        <tr><td>Seguridad digital básica</td><td>22 nov 2026</td><td><span class="estado ok">Emitido</span></td><td><a class="btn sm" href="{{root}}ejemplo/certificado-ejemplo.pdf">Descargar PDF</a></td></tr>
+        <tr><td>Fundamentos de redes</td><td>En curso</td><td><span class="estado">Pendiente</span></td><td></td></tr></table>
+        <p class="mut">El PDF de ejemplo es una muestra con datos ficticios.</p></div>
+    </section>
+
+    <section class="pm" id="r-ins" aria-labelledby="h-ins">
+      <p class="vl">VISTA DE INSTRUCTOR</p>
+      <h2 id="h-ins" class="titulo2">Mis grupos</h2>
+      <div class="panel" id="grupos"><p class="mut">Comparte el código para que tu alumnado se una al curso. La matrícula simbólica la fija el convenio (de 1 € a 5 € por estudiante).</p>
+        <table class="t"><tr><th>Centro</th><th>Curso</th><th>Estudiantes</th><th>Matrícula</th><th>Código</th></tr>
+        <tr><td>IES Can Rull</td><td>Introducción a la programación</td><td>24</td><td>2 € por estudiante</td><td><b>IES-4K7Q2</b></td></tr>
+        <tr><td>CFGM Sistemas</td><td>Fundamentos de redes</td><td>18</td><td>Según tipo de curso</td><td><b>CFG-9M3XA</b></td></tr></table>
+        <p class="row"><a class="btn main sm" href="#grupos" data-toast="Código de grupo generado">Generar código</a><a class="btn sm" href="#grupos" data-toast="Curso creado como borrador">Crear curso</a></p></div>
+      <div class="panel"><h2>Mis cursos</h2>
+        <table class="t"><tr><th>Curso</th><th>Modalidad</th><th>Estado</th></tr>
+        <tr><td>Introducción a la programación</td><td>Convenio</td><td><span class="estado ok">Publicado</span></td></tr>
+        <tr><td>Competencia digital para el empleo</td><td>Convenio</td><td><span class="estado">Borrador</span></td></tr></table>
+        <p class="mut">Un instructor también puede cursar como estudiante: cambia de rol arriba.</p></div>
+    </section>
+  </div>
+</div>

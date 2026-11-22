@@ -2,21 +2,22 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, cpSync, rmSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { cover } from './covers.mjs';
+import { glyph } from './covers.mjs';
+import { certificadoPdf } from './pdf.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = join(ROOT, 'src'), DIST = join(ROOT, 'dist');
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const MOD = {
   open: { tag: 'Gratis', cls: '', precio: 'Gratis · empieza cuando quieras' },
-  convenio: { tag: 'Con tu centro', cls: 'conv', precio: 'Matrícula simbólica · con código de tu centro' },
-  cisco: { tag: 'Cisco NetAcademy', cls: 'cisco', precio: 'Matrícula Cisco incluida según convenio' }
+  convenio: { tag: 'Con tu centro', cls: 'conv', precio: 'Matrícula simbólica de 1 € a 5 € por estudiante, según convenio' },
+  cisco: { tag: 'Cisco NetAcademy', cls: 'cisco', precio: 'Matrícula Cisco: depende del tipo de curso' }
 };
 
 export function card(c, root, withId, decor = false) {
   const m = MOD[c.modality];
   return `<article class="course"${withId ? ` id="${esc(c.slug)}"` : ''}>` +
-    `<img src="${root}img/covers/${esc(c.slug)}.svg" alt="" width="480" height="300" loading="lazy">` +
+    `<div class="cover k-${c.tone}" aria-hidden="true">${glyph(c.glyph)}<span class="rosette"></span></div>` +
     `<div class="body"><span class="tag ${m.cls}">${m.tag}</span><h3>${esc(c.title)}</h3><p>${esc(c.summary)}</p>` +
     `<ul class="meta"><li>${c.hours} h orientativas</li><li>Certificado en PDF</li></ul>` +
     `<p class="precio">${m.precio}</p>${decor ? '' : `<a class="btn sm" href="${root}acceder.html">Empezar</a>`}</div></article>`;
@@ -31,9 +32,9 @@ function parse(raw) {
 export function build() {
   const courses = JSON.parse(readFileSync(join(SRC, 'data/courses.json'), 'utf8'));
   rmSync(DIST, { recursive: true, force: true });
-  mkdirSync(join(DIST, 'img/covers'), { recursive: true });
+  mkdirSync(join(DIST, 'ejemplo'), { recursive: true });
   for (const f of ['css', 'img', 'fonts']) if (existsSync(join(SRC, f))) cpSync(join(SRC, f), join(DIST, f), { recursive: true });
-  for (const c of courses) writeFileSync(join(DIST, 'img/covers', c.slug + '.svg'), cover(c));
+  writeFileSync(join(DIST, 'ejemplo/certificado-ejemplo.pdf'), certificadoPdf({ nombre: 'Marta Puig Serra', curso: 'Fundamentos de redes', horas: 40, fecha: '2026-11-22', codigo: 'PEDU-2026-0A7F3C', cisco: true, muestra: true }));
   for (const f of ['_headers', 'robots.txt']) if (existsSync(join(SRC, f))) cpSync(join(SRC, f), join(DIST, f));
 
   const layout = readFileSync(join(SRC, 'partials/layout.html'), 'utf8');
@@ -41,16 +42,17 @@ export function build() {
   const footer = readFileSync(join(SRC, 'partials/footer.html'), 'utf8');
   const pages = [
     ...readdirSync(SRC).filter((f) => f.endsWith('.html')).map((f) => [f, '']),
-    ...readdirSync(join(SRC, 'legal')).filter((f) => f.endsWith('.html')).map((f) => ['legal/' + f, '../'])
+    ...['legal', 'ayuda', 'demo'].flatMap((d) => readdirSync(join(SRC, d)).filter((f) => f.endsWith('.html')).map((f) => [d + '/' + f, '../']))
   ];
-  mkdirSync(join(DIST, 'legal'), { recursive: true });
+  for (const d of ['legal', 'ayuda', 'demo']) mkdirSync(join(DIST, d), { recursive: true });
+  const cert = readFileSync(join(SRC, 'partials/cert.html'), 'utf8');
   for (const [file, root] of pages) {
     const p = parse(readFileSync(join(SRC, file), 'utf8'));
     const heroCards = courses.filter((c) => c.featured).slice(0, 3).map((c) => card(c, root, false, true)).join('');
     const vars = {
       content: p.body, header, footer, title: esc(p.title), description: esc(p.description), robots: esc(p.robots),
       featured: courses.filter((c) => c.featured).map((c) => card(c, root, false)).join(''),
-      hero_cards: heroCards, catalog: courses.map((c) => card(c, root, true)).join('')
+      hero_cards: heroCards, cert, catalog: courses.map((c) => card(c, root, true)).join('')
     };
     let html = layout;
     // Orden: primero los bloques grandes, despues {{root}} en todo el resultado.

@@ -3,6 +3,10 @@ Formato [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y versionado
 
 ## [Sin publicar]
 ### Añadido
+- Diseño en colores planos (sin degradados ni sombras, con regla de lint), portadas con la roseta original del logo y logo de Cisco Networking Academy.
+- Certificado de muestra en portada y generador de certificados PDF (`scripts/pdf.mjs`) con PDF de ejemplo.
+- Centro de ayuda multipágina (8 páginas) y campus virtual de demostración con vistas de estudiante e instructor.
+- Matrícula simbólica de 1 € a 5 € por estudiante fijada por convenio (por grupo en la base de datos); matrícula Cisco según tipo de curso.
 - Responsable técnico y de seguridad, nivel DEVAI 2 (ADR 0002) y fuentes públicas del Grupo (`docs/LEGAL-SOURCES.md`).
 - Campo `profiles.dip` para la identidad de PlacetaID.
 - Sitio público: inicio comercial, catálogo con portadas, acceso provisional y páginas legales (aviso legal, privacidad, cookies, condiciones, accesibilidad).

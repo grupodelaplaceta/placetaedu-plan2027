@@ -7,8 +7,8 @@
 | TECH-004 | Autoalojar Sora y Plus Jakarta Sans (OFL) en `src/fonts/`. Hasta entonces se usa la pila de sistema. | Media | Art. 26 |
 | TECH-005 | Límite de intentos del canje de códigos y rate limiting en la API. | Alta | Art. 19 |
 | TECH-006 | Pruebas de RLS por rol contra una base real. La migración no se ha ejecutado. | Alta (bloquea publicar) | Art. 57 |
-| TECH-007 | Proveedor de pagos (ADR), importe de la matrícula simbólica, IVA y facturación. | Alta | Art. 13 |
-| TECH-008 | Generación de certificados PDF y verificación pública. | Media | Art. 53 |
+| TECH-007 | Proveedor de pagos (ADR), IVA y facturación de la matrícula simbólica (1 € a 5 € por estudiante, fijada en el convenio) y de la matrícula Cisco según tipo de curso. | Alta | Art. 13 |
+| TECH-008 | Certificados PDF: el generador (`scripts/pdf.mjs`) y la muestra existen. Falta emitirlos desde el servidor con datos reales, sus tipografías de marca (Sora) y la página de verificación pública. | Media | Art. 53 |
 | TECH-009 | Auditoría WCAG 2.2 AA con axe y revisión manual. | Media | Art. 42 |
 | TECH-010 | Medir LCP/INP/CLS con Lighthouse; no se afirma rendimiento sin medida. | Media | Art. 41 |
 | TECH-011 | Integrar PlacetaID (plid26, `id.laplaceta.org`): alta como solicitante, `client_id`, `redirect_uri` y uso del DIP como identidad. | Alta | Art. 14 |

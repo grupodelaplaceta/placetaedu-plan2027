@@ -8,7 +8,9 @@ Campus online del Departamento de Educación de Grupo de La Placeta: formación 
 - Registro con Google o PlacetaID. Roles: estudiante e instructor (un instructor también puede cursar).
 - Cursos abiertos gratuitos, cursos por convenio con un centro (código de inscripción y matrícula simbólica) y cursos con matrícula Cisco Networking Academy.
 - Actividades de teoría, vídeo, imágenes, cuestionarios y laboratorios. Certificados oficiales en PDF.
-- Textos legales para España y la UE (`src/legal/`).
+- Textos legales para España y la UE (`src/legal/`) y centro de ayuda multipágina (`src/ayuda/`).
+- Certificados PDF: `scripts/pdf.mjs` genera el PDF y `npm run build` crea una muestra en `dist/ejemplo/`.
+- Diseño: solo colores planos y las imágenes originales de marca (roseta, sello y logo de Cisco) sin modificar.
 
 **Hecho en v0.1.0:** sitio público (inicio, catálogo, textos legales), portadas de curso, cabeceras de seguridad, esquema SQL con RLS (propuesto) y CI.
 **Pendiente:** autenticación, campus autenticado, pagos, generación de PDF (ver `docs/TECH-DEBT.md`).
