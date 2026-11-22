@@ -13,13 +13,13 @@ const MOD = {
   cisco: { tag: 'Cisco NetAcademy', cls: 'cisco', precio: 'Matrícula Cisco incluida según convenio' }
 };
 
-export function card(c, root, withId) {
+export function card(c, root, withId, decor = false) {
   const m = MOD[c.modality];
   return `<article class="course"${withId ? ` id="${esc(c.slug)}"` : ''}>` +
     `<img src="${root}img/covers/${esc(c.slug)}.svg" alt="" width="480" height="300" loading="lazy">` +
     `<div class="body"><span class="tag ${m.cls}">${m.tag}</span><h3>${esc(c.title)}</h3><p>${esc(c.summary)}</p>` +
     `<ul class="meta"><li>${c.hours} h orientativas</li><li>Certificado en PDF</li></ul>` +
-    `<p class="precio">${m.precio}</p><a class="btn sm" href="${root}acceder.html">Empezar</a></div></article>`;
+    `<p class="precio">${m.precio}</p>${decor ? '' : `<a class="btn sm" href="${root}acceder.html">Empezar</a>`}</div></article>`;
 }
 
 function parse(raw) {
@@ -46,7 +46,7 @@ export function build() {
   mkdirSync(join(DIST, 'legal'), { recursive: true });
   for (const [file, root] of pages) {
     const p = parse(readFileSync(join(SRC, file), 'utf8'));
-    const heroCards = courses.filter((c) => c.featured).slice(0, 3).map((c) => card(c, root, false)).join('');
+    const heroCards = courses.filter((c) => c.featured).slice(0, 3).map((c) => card(c, root, false, true)).join('');
     const vars = {
       content: p.body, header, footer, title: esc(p.title), description: esc(p.description), robots: esc(p.robots),
       featured: courses.filter((c) => c.featured).map((c) => card(c, root, false)).join(''),
