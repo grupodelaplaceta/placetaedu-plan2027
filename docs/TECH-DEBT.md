@@ -11,3 +11,7 @@
 | TECH-008 | Generación de certificados PDF y verificación pública. | Media | Art. 53 |
 | TECH-009 | Auditoría WCAG 2.2 AA con axe y revisión manual. | Media | Art. 42 |
 | TECH-010 | Medir LCP/INP/CLS con Lighthouse; no se afirma rendimiento sin medida. | Media | Art. 41 |
+| TECH-011 | Integrar PlacetaID (plid26, `id.laplaceta.org`): alta como solicitante, `client_id`, `redirect_uri` y uso del DIP como identidad. | Alta | Art. 14 |
+| TECH-012 | Exponer la API que Placeta Joven espera de PlacetaEDU (`GET /pathways`; PlacetaEDU es la fuente de verdad de cursos, actividades, progreso y certificados). | Media | Art. 13 |
+| TECH-013 | Recompensas en Pz y becas sobre la matrícula: dependen de Banco de La Placeta y RSP. Al activarlas, reevaluar a nivel 3 (ADR 0002). | Alta | Art. 6 |
+| TECH-014 | Alinear los textos legales con los vigentes del Grupo (servidos desde el BOLP). Ver `docs/LEGAL-SOURCES.md`. | Alta (bloquea publicar) | Art. 26 |

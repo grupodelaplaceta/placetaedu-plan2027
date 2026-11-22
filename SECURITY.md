@@ -1,7 +1,7 @@
 # Política de seguridad
 
 ## Cómo notificar una vulnerabilidad
-Envíe un informe privado a: **PENDIENTE (contacto institucional de seguridad)** o mediante el aviso de seguridad privado del repositorio. No publique detalles ni abra issues públicas.
+Envíe un informe privado a: **malegre@laplaceta.org** (Mikel Alegre Marcos, responsable técnico y de seguridad; sustituir por un contacto institucional si el repositorio pasa a ser público) o mediante el aviso de seguridad privado del repositorio. No publique detalles ni abra issues públicas.
 Incluya: descripción, pasos para reproducir, impacto y versión afectada.
 
 ## Compromisos

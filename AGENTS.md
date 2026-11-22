@@ -1,7 +1,10 @@
 # AGENTS.md
 
 ## Proyecto
-Nombre: PlacetaEDU · Finalidad: campus online de formación del Departamento de Educación de Grupo de La Placeta · Nivel DEVAI: nivel 2 (asumido) · Estado: activo
+Nombre: PlacetaEDU · Finalidad: campus online de formación del Departamento de Educación de Grupo de La Placeta · Nivel DEVAI: nivel 2 (ADR 0002) · Estado: activo
+
+## Responsable
+Mikel Alegre Marcos (DIP-23749931M), responsable técnico y de seguridad.
 
 ## Stack
 Node.js 22, HTML/CSS estáticos con generador propio sin dependencias, PostgreSQL con Supabase (RLS), despliegue estático por definir (`docs/DEPLOYMENT.md`).

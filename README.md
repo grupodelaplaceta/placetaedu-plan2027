@@ -2,7 +2,7 @@
 
 Campus online del Departamento de Educación de Grupo de La Placeta: formación accesible, acompañada y orientada a oportunidades reales.
 
-**Estado:** activo (v0.1.0, fase 1: sitio público y base de datos propuesta) · **Nivel DEVAI:** nivel 2 (asumido, pendiente de confirmar) · **Manual DEVAI:** 2.0
+**Estado:** activo (v0.1.0, fase 1: sitio público y base de datos propuesta) · **Nivel DEVAI:** nivel 2 (decidido en `docs/decisions/0002-nivel-devai.md`) · **Manual DEVAI:** 2.0
 
 ## Finalidad y funcionalidades
 - Registro con Google o PlacetaID. Roles: estudiante e instructor (un instructor también puede cursar).
@@ -47,7 +47,8 @@ Google y PlacetaID (acceso), Cisco Networking Academy (matrícula y certificados
 ## Responsables técnicos y de seguridad
 | Técnico | Identificación DIP | Rol |
 |---|---|---|
-| PENDIENTE | PENDIENTE | Responsable técnico |
-| PENDIENTE | PENDIENTE | Responsable de seguridad |
+| Mikel Alegre Marcos | DIP-23749931M | Responsable técnico y de seguridad |
+
+Contacto: malegre@laplaceta.org. Este repositorio debe ser **privado**: si se hace público, sustituir el DIP por un contacto institucional (Art. 38).
 
 Para notificar una vulnerabilidad, consulta [SECURITY.md](SECURITY.md).

@@ -12,6 +12,7 @@ create type public.payment_status as enum ('pending', 'paid', 'failed', 'refunde
 
 create table public.profiles (
   id uuid primary key references auth.users (id) on delete cascade,
+  dip text unique,                          -- identificador PlacetaID (plid26); se rellena al integrar el acceso
   display_name text not null check (char_length(display_name) between 1 and 120),
   avatar_url text,
   created_at timestamptz not null default now()
