@@ -62,7 +62,7 @@
       ]
     },
     {
-      "source": "/(css|img|js)/(.*)",
+      "source": "/(css|img|js|fonts)/(.*)",
       "headers": [
         {
           "key": "Cache-Control",

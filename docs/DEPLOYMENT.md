@@ -25,10 +25,9 @@ Instala con `npm ci --ignore-scripts`, ejecuta `npm run build` y publica `dist/`
 ## Condiciones para producción
 Hasta que se cumplan, `src/robots.txt` cierra el sitio a buscadores y no debe asignarse el dominio definitivo:
 1. Textos legales completados y revisados (TECH-014).
-2. Fuentes autoalojadas añadidas a `src/fonts/` (TECH-004).
-3. Acciones de CI fijadas por SHA (TECH-003).
-4. Aprobación de la persona responsable y de una segunda persona revisora.
-5. Cambiar `src/robots.txt` a `Allow: /`.
+2. Acciones de CI fijadas por SHA (TECH-003).
+3. Aprobación de la persona responsable y de una segunda persona revisora.
+4. Cambiar `src/robots.txt` a `Allow: /`.
 
 ## Fase 2 (campus con cuentas)
 Supabase se despliega aparte (migraciones con copia previa, plan de reversión y aprobación). Vercel pasará a necesitar variables `PUBLIC_*` y un entorno separado para staging y producción.

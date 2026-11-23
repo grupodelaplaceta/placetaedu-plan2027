@@ -42,7 +42,7 @@ Vercel (`vercel.json`): preview desde `devai`, producción desde `main`. Pasos y
 Solo nombres, en `.env.example`: `PUBLIC_SUPABASE_URL`, `PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (solo servidor), `PAYMENT_PROVIDER_WEBHOOK_SECRET`. La fase 1 no las usa.
 
 ## Estructura
-`src/` sitio (páginas, `legal/`, `partials/`, `css/`, `img/`, `data/courses.json`) · `scripts/` build y lint · `tests/` · `supabase/migrations/` · `docs/` · `.github/`.
+`src/` sitio (páginas, `legal/`, `partials/`, `css/`, `fonts/`, `img/`, `data/courses.json`) · `scripts/` build y lint · `tests/` · `supabase/migrations/` · `docs/` · `.github/`.
 
 ## Integraciones
 Google y PlacetaID (acceso), Cisco Networking Academy (matrícula y certificados Cisco), proveedor de pagos por definir. Detalle en `docs/ARCHITECTURE.md`.

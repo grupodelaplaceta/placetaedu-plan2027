@@ -77,6 +77,15 @@ test('el sitio no carga recursos de terceros', () => {
   }
 });
 
+test('las fuentes de marca estan autoalojadas y llegan al build', () => {
+  for (const font of ['Sora-Variable.woff2', 'PlusJakartaSans-Variable.woff2']) {
+    assert.ok(existsSync(join(DIST, 'fonts', font)), font);
+  }
+  const css = readFileSync(join(DIST, 'css/app.css'), 'utf8');
+  assert.match(css, /url\("\.\.\/fonts\/Sora-Variable\.woff2"\)/);
+  assert.match(css, /url\("\.\.\/fonts\/PlusJakartaSans-Variable\.woff2"\)/);
+});
+
 test('cabeceras de seguridad definidas sin unsafe-inline', () => {
   const h = readFileSync(join(ROOT, 'src/_headers'), 'utf8');
   for (const k of ['Content-Security-Policy', 'Strict-Transport-Security', 'X-Content-Type-Options', 'Referrer-Policy', 'Permissions-Policy']) assert.ok(h.includes(k), k);

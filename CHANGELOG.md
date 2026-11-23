@@ -11,6 +11,7 @@ Formato [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y versionado
 - El sitio y el campus se muestran siempre en modo claro, con independencia del tema del dispositivo.
 
 ### Añadido
+- Fuentes Sora y Plus Jakarta Sans autoalojadas en formato WOFF2, con licencias OFL y prueba de publicación en el build.
 - Campus virtual de demostración: carrusel de cursos, calendario, notificaciones, calificaciones y entorno de curso con pantalla de carga, todos los tipos de contenido y examen final protegido.
 - Migración `0002_campus.sql` (módulos, notificaciones, alta Cisco, exámenes con claves en servidor, notas ponderadas) y `docs/CAMPUS.md`.
 - Diseño en colores planos (sin degradados ni sombras, con regla de lint), portadas con la roseta original del logo y logo de Cisco Networking Academy.

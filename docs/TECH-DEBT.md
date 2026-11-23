@@ -4,7 +4,7 @@
 | TECH-001 | Typecheck: no hay TypeScript todavía. Al añadir JavaScript de campus, adoptar TypeScript estricto (requiere aprobar dependencia). | Media | Art. 9 |
 | TECH-002 | Autenticación (Google y PlacetaID) con Supabase Auth y PKCE. Requiere aprobar `@supabase/supabase-js` con versión fijada y esperar el enfriamiento de 14 días. | Alta | Art. 14, 23 |
 | TECH-003 | Fijar por SHA las acciones de `.github/workflows/`. No se inventan SHAs sin red. | Alta (bloquea publicar) | Art. 24 |
-| TECH-004 | Autoalojar Sora y Plus Jakarta Sans (OFL) en `src/fonts/`. Hasta entonces se usa la pila de sistema. | Media | Art. 26 |
+| TECH-004 | Sora y Plus Jakarta Sans están autoalojadas en `src/fonts/` con sus licencias OFL y se sirven por Vercel sin recursos externos. | Cerrada | Art. 26 |
 | TECH-005 | Límite de intentos del canje de códigos y rate limiting en la API. | Alta | Art. 19 |
 | TECH-006 | Pruebas de RLS por rol contra una base real. La migración no se ha ejecutado. | Alta (bloquea publicar) | Art. 57 |
 | TECH-007 | Proveedor de pagos (ADR), IVA y facturación de la matrícula simbólica (1 € a 5 € por estudiante, fijada en el convenio) y de la matrícula Cisco según tipo de curso. | Alta | Art. 13 |
