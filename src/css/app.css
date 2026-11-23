@@ -237,3 +237,10 @@ fieldset{border:2px solid var(--line);border-radius:14px;margin:12px 0;padding:1
 @keyframes s-barra{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes s-fuera{to{opacity:0;visibility:hidden}}
 @media (prefers-reduced-motion:reduce){.splash.run{animation:s-fuera .1s ease .8s forwards}.rosette.gira,.anillo,.s-b i,.s-l span{animation:none}.s-l span:first-child{opacity:1}.s-b i{transform:none}}
+
+input[type=radio],input[type=checkbox]{flex:none;width:20px;height:20px;padding:0;margin:2px 0 0;accent-color:#1b0a5e}
+.op span{flex:1;text-align:left}.op:hover{border-color:var(--ink)}.op:has(input:checked){border:2px solid var(--ink);background:var(--card)}
+.fb{margin:8px 0 2px;padding:10px 14px;border-radius:12px;font-size:.93rem;font-weight:600}.fb.bien{background:#d9f2e4;color:#0f4d30}.fb.mal{background:#fbe0e0;color:#7a1212}
+fieldset:disabled .op{cursor:default}.res.falta{color:#b01c1c}.res.ok{color:#0f4d30}
+.tiempo.poco{color:#b01c1c}.qbar{margin:8px 0}
+[hidden]{display:none!important}.fila-q{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0 6px}fieldset[inert]{opacity:1}

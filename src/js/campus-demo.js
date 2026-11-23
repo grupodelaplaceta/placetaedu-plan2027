@@ -60,12 +60,34 @@
   });
   recalcula();
 
-  /* Cuestionarios */
+  /* Cuestionarios: corrigen todo a la vez, explican cada respuesta y se pueden repetir */
+  function marcaHecha(id) {
+    var li = $('.indice li[data-u="' + id + '"]'); if (li) li.classList.add('hecho');
+    var b = $('[data-hecho="' + id + '"]'); if (b) b.textContent = 'Marcada como hecha ✓';
+    recalcula();
+  }
   $$('form[data-quiz]').forEach(function (f) {
+    var res = $('.res', f), enviar = $('button[type=submit]', f), otra = $('.again', f), min = Number(f.getAttribute('data-min')), mejor = null;
     f.addEventListener('submit', function (e) {
-      e.preventDefault(); var fs = $$('fieldset', f), ok = 0;
-      fs.forEach(function (s) { var sel = $('input:checked', s), bien = sel && sel.value === s.getAttribute('data-ok'); if (bien) ok++; s.classList.toggle('bien', !!bien); s.classList.toggle('mal', !bien); });
-      var n = Math.round(ok * 100 / fs.length), r = $('.res', f); r.textContent = 'Resultado: ' + ok + ' de ' + fs.length + ' (' + n + ' %). Nota mínima de la actividad: ' + f.getAttribute('data-min') + ' %. ' + (n >= Number(f.getAttribute('data-min')) ? 'Aprobada.' : 'Puedes repetirla.');
+      e.preventDefault();
+      var fs = $$('fieldset', f), sin = fs.filter(function (s) { return !$('input:checked', s); });
+      if (sin.length) { res.className = 'res falta'; res.textContent = 'Responde todas las preguntas antes de comprobar. Te faltan ' + sin.length + '.'; sin[0].scrollIntoView({ block: 'center' }); return; }
+      var ok = 0;
+      fs.forEach(function (s) {
+        var bien = $('input:checked', s).value === s.getAttribute('data-ok'); if (bien) ok++;
+        s.classList.toggle('bien', bien); s.classList.toggle('mal', !bien); s.inert = true;
+        var fb = $('.fb', s); fb.hidden = false; fb.className = 'fb ' + (bien ? 'bien' : 'mal'); fb.textContent = (bien ? '✓ Correcta. ' : '✗ Incorrecta. ') + s.getAttribute('data-expl');
+      });
+      var n = Calificar.nota(ok, fs.length); mejor = mejor == null ? n : Math.max(mejor, n);
+      var pasa = n >= min;
+      res.className = 'res ' + (pasa ? 'ok' : 'falta');
+      res.textContent = 'Tu nota: ' + String(n).replace('.', ',') + ' / 100 (' + ok + ' de ' + fs.length + '). Mínimo para aprobar: ' + min + '. ' + (pasa ? 'Aprobado. La unidad queda completada.' : 'No llegas al mínimo: repasa las explicaciones y repite el cuestionario.') + (mejor !== n ? ' Mejor nota: ' + String(mejor).replace('.', ',') + '.' : '');
+      enviar.hidden = true; otra.hidden = false;
+      if (pasa) marcaHecha(f.getAttribute('data-unit'));
+    });
+    otra.addEventListener('click', function () {
+      $$('fieldset', f).forEach(function (s) { s.inert = false; s.classList.remove('bien', 'mal'); $$('input', s).forEach(function (i) { i.checked = false; }); var fb = $('.fb', s); fb.hidden = true; fb.textContent = ''; });
+      res.textContent = ''; res.className = 'res'; enviar.hidden = false; otra.hidden = true; $('fieldset', f).scrollIntoView({ block: 'center' });
     });
   });
 
@@ -76,30 +98,38 @@
     { q: '¿Qué topología conecta todos los equipos a un nodo central?', o: ['Anillo', 'Bus', 'Estrella', 'Malla parcial'], ok: 2 },
     { q: '¿Qué protocolo traduce nombres de dominio en direcciones IP?', o: ['DHCP', 'DNS', 'FTP', 'SMTP'], ok: 1 },
     { q: '¿Qué capa del modelo OSI se encarga del enrutamiento?', o: ['Enlace de datos', 'Transporte', 'Red', 'Sesión'], ok: 2 },
-    { q: '¿Qué hace el protocolo DHCP?', o: ['Cifra el tráfico', 'Asigna direcciones IP automáticamente', 'Filtra paquetes', 'Mide la latencia'], ok: 1 }
+    { q: '¿Qué hace el protocolo DHCP?', o: ['Cifra el tráfico', 'Asigna direcciones IP automáticamente', 'Filtra paquetes', 'Mide la latencia'], ok: 1 },
+    { q: '¿Qué indica la máscara de subred 255.255.255.0?', o: ['Que hay 24 bits de red', 'Que hay 8 bits de red', 'Que la red es inalámbrica', 'Que el equipo es un servidor'], ok: 0 },
+    { q: '¿Qué comando comprueba si otro equipo responde en la red?', o: ['ping', 'format', 'copy', 'print'], ok: 0 },
+    { q: '¿Qué medio transmite la señal como pulsos de luz?', o: ['Cable de cobre', 'Fibra óptica', 'Wi-Fi', 'Bluetooth'], ok: 1 },
+    { q: '¿Cuál es una dirección IPv4 válida?', o: ['256.10.1.1', '192.168.0.300', '10.0.0.15', '172.16.1'], ok: 2 },
+    { q: 'En una red local, ¿qué dispositivo suele conectar varios equipos entre sí?', o: ['Conmutador (switch)', 'Altavoz', 'Teclado', 'Monitor'], ok: 0 },
+    { q: '¿Qué hace un servidor DNS?', o: ['Reparte direcciones IP', 'Traduce nombres en direcciones IP', 'Cifra los correos', 'Acelera el Wi-Fi'], ok: 1 }
   ];
   function mezcla(a) { var x = a.slice(), i, j, t; for (i = x.length - 1; i > 0; i--) { j = Math.floor(Math.random() * (i + 1)); t = x[i]; x[i] = x[j]; x[j] = t; } return x; }
   var ini = $('#examen-iniciar');
   if (ini) {
-    var MIN_APROBADO = 60, DURACION = 120, st = null, tmr = null;
+    var NUM = 8, MIN_APROBADO = 60, DURACION = 180, st = null, tmr = null;
     var intro = $('#examen-intro'), run = $('#examen-run'), fin = $('#examen-fin');
     var evt = function (t) { if (!st || st.done) return; st.log.push(t); var l = $('#examen-log'); if (l) l.textContent = String(st.log.length); };
     document.addEventListener('visibilitychange', function () { if (document.hidden) evt('Cambio de pestaña o ventana'); });
     window.addEventListener('blur', function () { evt('La ventana perdió el foco'); });
     ['copy', 'paste', 'cut'].forEach(function (n) { document.addEventListener(n, function (e) { if (st && !st.done) { e.preventDefault(); evt('Intento de ' + (n === 'copy' ? 'copiar' : n === 'paste' ? 'pegar' : 'cortar')); } }); });
     document.addEventListener('contextmenu', function (e) { if (st && !st.done) { e.preventDefault(); evt('Menú contextual bloqueado'); } });
+    window.addEventListener('hashchange', function () { if (st && !st.done && location.hash !== '#examen') evt('Salió de la pantalla del examen'); });
     window.addEventListener('beforeunload', function (e) { if (st && !st.done) { e.preventDefault(); e.returnValue = ''; } });
     var pinta = function () {
       var p = st.preg[st.i], box = $('#examen-preg'); while (box.firstChild) box.removeChild(box.firstChild);
       box.appendChild(el('p', 'mut', 'Pregunta ' + (st.i + 1) + ' de ' + st.preg.length)); box.appendChild(el('h3', null, p.q));
       p.o.forEach(function (o, k) { var l = el('label', 'op'), r = el('input'); r.type = 'radio'; r.name = 'resp'; r.value = String(k); if (st.resp[st.i] === k) r.checked = true; r.addEventListener('change', function () { st.resp[st.i] = k; }); l.appendChild(r); l.appendChild(el('span', null, o.t)); box.appendChild(l); });
+      var pg = $('#examen-pg'); if (pg) { pg.max = st.preg.length; pg.value = st.i; }
       $('#examen-sig').textContent = st.i === st.preg.length - 1 ? 'Entregar examen' : 'Siguiente';
     };
     var cierra = function (motivo) {
       st.done = true; clearInterval(tmr); var ok = 0; st.preg.forEach(function (p, i) { if (st.resp[i] != null && p.o[st.resp[i]].ok) ok++; });
-      var nota = Math.round(ok * 100 / st.preg.length), aprob = nota >= MIN_APROBADO;
+      var nota = Calificar.nota(ok, st.preg.length), aprob = nota >= MIN_APROBADO;
       run.hidden = true; fin.hidden = false;
-      $('#examen-nota').textContent = nota + ' / 100';
+      $('#examen-nota').textContent = String(nota).replace('.', ',') + ' / 100';
       $('#examen-estado').textContent = aprob ? 'Aprobado (mínimo ' + MIN_APROBADO + ')' : 'No superado (mínimo ' + MIN_APROBADO + ')';
       $('#examen-estado').className = 'estado ' + (aprob ? 'ok' : 'mal');
       $('#examen-motivo').textContent = motivo === 'tiempo' ? 'Se agotó el tiempo y el examen se entregó automáticamente.' : 'Examen entregado.';
@@ -109,11 +139,12 @@
     };
     ini.addEventListener('click', function () {
       if (!$('#examen-acepto').checked) { toast('Marca la declaración de honestidad para empezar.'); return; }
-      st = { i: 0, resp: [], log: [], done: false, t: DURACION, preg: mezcla(BANCO).slice(0, 5).map(function (p) { return { q: p.q, o: mezcla(p.o.map(function (t, k) { return { t: t, ok: k === p.ok }; })) }; }) };
+      st = { i: 0, resp: [], log: [], done: false, t: DURACION, preg: mezcla(BANCO).slice(0, NUM).map(function (p) { return { q: p.q, o: mezcla(p.o.map(function (t, k) { return { t: t, ok: k === p.ok }; })) }; }) };
       intro.hidden = true; run.hidden = false; pinta();
       var tm = $('#examen-tiempo'), f = function () { tm.textContent = String(Math.floor(st.t / 60)).padStart(2, '0') + ':' + String(st.t % 60).padStart(2, '0'); };
-      f(); tmr = setInterval(function () { st.t--; f(); if (st.t <= 0) cierra('tiempo'); }, 1000);
+      f(); tmr = setInterval(function () { st.t--; f(); tm.classList.toggle('poco', st.t <= 30); if (st.t <= 0) cierra('tiempo'); }, 1000);
     });
+    var rep = $('#examen-reintentar'); if (rep) rep.addEventListener('click', function () { st = null; fin.hidden = true; intro.hidden = false; $('#examen-acepto').checked = false; $('#examen-log').textContent = '0'; $('#examen-tiempo').classList.remove('poco'); });
     $('#examen-sig').addEventListener('click', function () { if (st.resp[st.i] == null) { toast('Elige una respuesta para continuar.'); return; } if (st.i < st.preg.length - 1) { st.i++; pinta(); } else cierra('entrega'); });
   }
 })();

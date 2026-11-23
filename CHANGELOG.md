@@ -3,6 +3,8 @@ Formato [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y versionado
 
 ## [Sin publicar]
 ### Cambiado
+- Cuestionarios rehechos: 5 preguntas, aviso si faltan respuestas, explicación de cada una, nota, repetición y unidad completada al aprobar. Examen con banco de 14 preguntas, avance y registro al salir de la pantalla.
+- Cálculo de notas aislado en `src/js/calificar.js` con 8 pruebas unitarias.
 - El sitio y el campus se muestran siempre en modo claro, con independencia del tema del dispositivo.
 
 ### Añadido
