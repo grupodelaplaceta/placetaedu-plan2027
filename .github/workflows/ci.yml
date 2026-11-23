@@ -12,7 +12,7 @@ jobs:
     steps:
       # TECH-003: fijar estas acciones por SHA de commit antes de publicar (Art. 24).
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
       - run: npm run lint
