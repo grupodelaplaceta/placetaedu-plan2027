@@ -85,12 +85,12 @@ test('cabeceras de seguridad definidas sin unsafe-inline', () => {
 });
 
 test('migraciones: toda tabla de public tiene RLS activado y hay reversion', () => {
-  const sql = readFileSync(join(ROOT, 'supabase/migrations/0001_init.sql'), 'utf8');
+  const sql = readdirSync(join(ROOT, 'supabase/migrations')).filter((f) => f.endsWith('.sql') && !f.endsWith('.down.sql')).sort().map((f) => readFileSync(join(ROOT, 'supabase/migrations', f), 'utf8')).join('\n');
   const tablas = [...sql.matchAll(/create table public\.(\w+)/g)].map((m) => m[1]);
-  assert.ok(tablas.length >= 9);
+  assert.ok(tablas.length >= 18);
   for (const t of tablas) assert.match(sql, new RegExp(`alter table public\\.${t} enable row level security`), t);
   const funciones = sql.split(/\bcreate function\b/).slice(1);
-  assert.ok(funciones.length >= 6);
+  assert.ok(funciones.length >= 14);
   for (const f of funciones.filter((x) => /security definer/.test(x.split('$$')[0]))) assert.match(f.split('$$')[0], /search_path = ''/, f.slice(0, 40));
   assert.ok(existsSync(join(ROOT, 'supabase/migrations/0001_init.down.sql')));
   assert.ok(!/to anon[^;]*\binsert\b/i.test(sql));
@@ -144,4 +144,32 @@ test('portada: muestra de certificado y PDF de ejemplo valido', () => {
 test('migracion: matricula simbolica por grupo entre 100 y 500 centimos', () => {
   const sql = readFileSync(join(ROOT, 'supabase/migrations/0001_init.sql'), 'utf8');
   assert.match(sql, /enrollment_fee_cents int not null default 0 check \(enrollment_fee_cents = 0 or enrollment_fee_cents between 100 and 500\)/);
+});
+
+test('examenes: las respuestas correctas no son accesibles desde el cliente', () => {
+  const sql = readFileSync(join(ROOT, 'supabase/migrations/0002_campus.sql'), 'utf8');
+  assert.ok(!/grant[^;]*(exam_answer_keys|exam_questions)/i.test(sql.replace(/revoke[^;]*;/gi, '')));
+  assert.match(sql, /revoke all on[^;]*exam_answer_keys/);
+  assert.ok(!/create policy[^;]*on public\.(exam_answer_keys|exam_questions)/.test(sql));
+  assert.ok(!/options[^;]*correct/.test(sql.split('create table public.exam_answer_keys')[0].split('create table public.exam_questions')[1] || ''));
+  for (const f of ['start_exam_attempt', 'exam_question', 'exam_answer', 'exam_finish', 'course_grade']) assert.match(sql, new RegExp(`create function public\\.${f}`));
+});
+
+test('campus de demostracion: carrusel con +, calendario, notificaciones, notas y certificados', () => {
+  const h = html('demo/campus.html');
+  for (const s of ['class="carrusel"', 'mas-card', 'class="cal"', 'id="notificaciones"', 'id="calificaciones"', 'id="mis-certificados"', 'Cisco · Error', 'Cisco · Pendiente', 'Cisco · Alta confirmada']) assert.ok(h.includes(s), s);
+  assert.match(h, /progress class="pg" value="4" max="10"/);
+  assert.match(h, /class="ev examen"/);
+});
+
+test('entorno de curso: pantalla de carga, indice, todos los tipos de contenido y examen', () => {
+  const h = html('demo/curso.html');
+  for (const s of ['class="splash run"', 'class="indice"', 'id="u-1-2"', 'id="u-1-3"', 'data-quiz', 'id="u-2-2"', 'id="examen"', 'Protecciones contra el fraude']) assert.ok(h.includes(s), s);
+  for (const k of ['Teoría', 'Vídeo', 'Imágenes', 'Cuestionario', 'Laboratorio']) assert.ok(h.includes(`<small>${k}</small>`), k);
+  assert.match(h, /alt|aria-label="Topología/);
+});
+
+test('el js de demostracion no usa innerHTML ni eval', () => {
+  const j = readFileSync(join(ROOT, 'src/js/campus-demo.js'), 'utf8');
+  assert.ok(!/innerHTML|eval\(|document\.write/.test(j));
 });

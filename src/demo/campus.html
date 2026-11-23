@@ -2,49 +2,94 @@
 <div class="camp">
   <aside class="side" aria-label="Campus">
     <div class="yo"><span class="av" aria-hidden="true">MP</span><span><b>Marta Puig</b><br><span class="mut">Estudiante</span></span></div>
-    <a href="#inicio-c" aria-current="page">Inicio</a><a href="#mis-cursos">Mis cursos</a><a href="#mis-certificados">Certificados</a><a href="#grupos">Mis grupos</a><a href="{{root}}ayuda/index.html">Ayuda</a>
+    <a href="#inicio-c" aria-current="page">Inicio</a>
+    <a href="#calendario">Calendario</a>
+    <a href="#notificaciones">Notificaciones <span class="badge" id="badge-notif">3</span></a>
+    <a href="#calificaciones">Calificaciones</a>
+    <a href="#mis-certificados">Certificados</a>
+    <a href="{{root}}cursos.html">Catálogo de cursos</a>
+    <a href="{{root}}ayuda/index.html">Ayuda</a>
   </aside>
   <div class="pm">
     <p class="aviso">Demostración con datos ficticios. El acceso real con Google o PlacetaID llegará con el campus autenticado.</p>
+    <div class="switch" role="group" aria-label="Rol activo"><button type="button" aria-pressed="true" data-role="est">Estudiante</button><button type="button" aria-pressed="false" data-role="ins">Instructor</button></div>
 
     <section class="pm" id="r-est" aria-labelledby="h-est">
-      <p class="vl">VISTA DE ESTUDIANTE</p>
       <h1 id="h-est">Hola, Marta</h1>
-      <div class="stats" id="inicio-c"><div class="stat s1"><b>2</b><span>Cursos en marcha</span></div><div class="stat s2"><b>1</b><span>Certificado</span></div><div class="stat s3"><b>40 %</b><span>Progreso en redes</span></div></div>
 
-      <div class="cont">
-        <div class="cover k-c" aria-hidden="true"><svg class="glyph" viewBox="0 0 100 100" width="96" height="96" aria-hidden="true" focusable="false"><circle cx="50" cy="22" r="9"/><circle cx="20" cy="74" r="9"/><circle cx="80" cy="74" r="9"/><path d="M50 31 22 66M50 31l28 35M29 74h42"/></svg><span class="rosette"></span></div>
-        <div class="info"><span class="tag cisco">Cisco NetAcademy</span><h2>Fundamentos de redes</h2>
-          <div class="bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="Progreso 40 %"><i class="w40"></i></div>
-          <p class="mut">4 de 10 actividades · Siguiente: laboratorio «Tu primera red»</p><p><a class="btn main sm" href="#mis-cursos" data-toast="Abriendo el laboratorio…">Continuar</a></p></div>
+      <div id="inicio-c">
+        <div class="row"><h2 class="h2c">Mis cursos</h2><span class="mut">Desliza para ver todos</span></div>
+        <div class="carrusel" tabindex="0" role="region" aria-label="Mis cursos, desplazable en horizontal">
+          <article class="tarjeta" data-curso="redes">
+            <div class="cover chico k-c" aria-hidden="true"><span class="rosette"></span></div>
+            <div class="tb"><span class="tag cisco">Cisco NetAcademy</span><h3>Fundamentos de redes</h3><p class="mut">Curso Cisco · IES Can Rull</p>
+              <progress class="pg" value="4" max="10" aria-label="Progreso: 4 de 10 unidades"></progress><p class="mut">4 de 10 unidades</p><a class="btn main sm" href="{{root}}demo/curso.html">Entrar</a></div>
+          </article>
+          <article class="tarjeta" data-curso="ia">
+            <div class="cover chico k-a" aria-hidden="true"><span class="rosette"></span></div>
+            <div class="tb"><span class="tag">Gratis</span><h3>Primeros pasos con IA</h3><p class="mut">Curso abierto</p>
+              <progress class="pg" value="15" max="100" aria-label="Progreso: 15 %"></progress><p class="mut">15 %</p><a class="btn sm" href="{{root}}demo/curso.html">Entrar</a></div>
+          </article>
+          <article class="tarjeta" data-curso="seg">
+            <div class="cover chico k-d" aria-hidden="true"><span class="rosette"></span></div>
+            <div class="tb"><span class="tag">Gratis</span><h3>Seguridad digital básica</h3><p class="mut">Curso abierto · completado</p>
+              <progress class="pg" value="100" max="100" aria-label="Progreso: 100 %"></progress><p class="mut">100 % · aprobado con 88</p><a class="btn sm" href="#mis-certificados">Ver certificado</a></div>
+          </article>
+          <details class="tarjeta mas-card">
+            <summary aria-label="Añadir un curso"><span class="mas" aria-hidden="true">+</span><span>Añadir un curso</span></summary>
+            <div class="mas-op">
+              <a class="btn sm" href="{{root}}cursos.html">Ver el catálogo de cursos</a>
+              <label for="cod">O introduce un código de inscripción</label>
+              <div class="code"><input id="cod" placeholder="Ej. IES-4K7Q2" autocomplete="off"><button type="button" class="btn main sm" id="join">Unirme</button></div>
+              <p class="mut" id="join-msg" role="status">Prueba con IES-4K7Q2 (código de demostración).</p>
+            </div>
+          </details>
+        </div>
       </div>
 
-      <div class="panel" id="mis-cursos"><h2>Fundamentos de redes</h2><p class="mut">Todo tipo de actividad en un mismo curso.</p>
-        <ul class="act"><li class="done"><span class="k">Teoría</span>Qué es una red<span class="d">Hecho</span></li><li class="done"><span class="k">Vídeo</span>Cómo viaja un mensaje<span class="d">Hecho</span></li><li class="done"><span class="k">Imágenes</span>Topologías de red<span class="d">Hecho</span></li><li class="done"><span class="k">Cuestionario</span>Conceptos básicos<span class="d">Hecho</span></li><li><span class="k">Laboratorio</span>Tu primera red en Packet Tracer<span class="d">Siguiente</span></li></ul></div>
+      <div class="panel" id="calendario"><h2>Calendario de tareas</h2><p class="mut">Entregas, unidades que se cierran y exámenes de todos tus cursos.</p>
+        <div class="cal-bloque">{{calendar}}</div></div>
 
-      <div class="panel"><h2>Unirme a un grupo</h2><p class="mut">Escribe el código que te ha dado tu centro.</p>
-        <div class="code"><input id="cod" aria-label="Código de inscripción" placeholder="Ej. IES-4K7Q2" autocomplete="off"><button type="button" class="btn main sm" id="join">Unirme</button></div></div>
+      <div class="panel" id="notificaciones"><div class="row"><h2>Notificaciones</h2><button type="button" class="btn sm" id="leer-todas">Marcar todas como leídas</button></div>
+        <p class="mut">PlacetaEDU te avisa del estado de tu alta en Cisco, de tu matrícula y de los plazos.</p>
+        <ul class="notifs" id="lista-notif">
+          <li class="notif nueva error"><span class="chip error">Cisco · Error</span><div><b>No hemos podido completar tu alta en Cisco Networking Academy</b><p class="mut">El correo marta.puig@ejemplo.org ya está asociado a otra cuenta en Cisco. Escribe a tu instructor o a soporte indicando este aviso y lo resolvemos. Fecha: 21 nov 2026.</p></div></li>
+          <li class="notif nueva pend"><span class="chip pend">Cisco · Pendiente</span><div><b>Tu alta en «Ciberseguridad esencial» sigue pendiente</b><p class="mut">Solicitada el 20 nov 2026. Cisco aún no la ha confirmado. Te avisaremos aquí en cuanto cambie.</p></div></li>
+          <li class="notif nueva ok"><span class="chip ok">Cisco · Alta confirmada</span><div><b>Ya estás dada de alta en «Fundamentos de redes»</b>
+            <dl class="datos"><dt>Usuario</dt><dd>marta.puig@ejemplo.org</dd><dt>Clase</dt><dd>Fundamentos de redes · IES Can Rull</dd><dt>Alta</dt><dd>18 nov 2026</dd><dt>Estado</dt><dd>Activa</dd></dl></div></li>
+          <li class="notif info"><span class="chip info">Matrícula</span><div><b>Tu centro ha abonado tu matrícula</b><p class="mut">IES Can Rull ha pagado tu matrícula simbólica por convenio. No tienes que pagar nada.</p></div></li>
+          <li class="notif ok"><span class="chip ok">Certificado</span><div><b>Tu certificado de «Seguridad digital básica» ya está disponible</b><p class="mut">Descárgalo en PDF desde la sección de certificados.</p></div></li>
+        </ul></div>
+
+      <div class="panel" id="calificaciones"><h2>Calificaciones</h2>
+        <p class="mut">La media se calcula con el peso de cada actividad evaluable. El curso se aprueba si la media alcanza la nota mínima fijada para ese curso.</p>
+        <table class="t"><caption>Fundamentos de redes · nota mínima para aprobar: 60</caption><tr><th>Actividad evaluable</th><th>Peso</th><th>Nota</th></tr>
+          <tr><td>Cuestionario módulo 1</td><td>10 %</td><td>80</td></tr><tr><td>Cuestionario módulo 2</td><td>10 %</td><td>70</td></tr>
+          <tr><td>Laboratorio «Tu primera red»</td><td>20 %</td><td>Pendiente</td></tr><tr><td>Examen final</td><td>60 %</td><td>Pendiente</td></tr>
+          <tr><th>Media provisional (solo actividades calificadas)</th><th>20 %</th><th>75</th></tr></table>
+        <p><span class="estado ok">Va aprobando</span> <span class="mut">(75 ≥ 60). Se confirma al calificar todo.</span></p>
+        <table class="t"><caption>Seguridad digital básica · nota mínima para aprobar: 50</caption><tr><th>Media final</th><th>Estado</th></tr><tr><td>88</td><td><span class="estado ok">Aprobado</span></td></tr></table></div>
 
       <div class="panel" id="mis-certificados"><h2>Mis certificados</h2>
-        <table class="t"><tr><th>Curso</th><th>Fecha</th><th>Estado</th><th><span class="vh">Descarga</span></th></tr>
-        <tr><td>Seguridad digital básica</td><td>22 nov 2026</td><td><span class="estado ok">Emitido</span></td><td><a class="btn sm" href="{{root}}ejemplo/certificado-ejemplo.pdf">Descargar PDF</a></td></tr>
-        <tr><td>Fundamentos de redes</td><td>En curso</td><td><span class="estado">Pendiente</span></td><td></td></tr></table>
+        <table class="t"><tr><th>Curso</th><th>Fecha</th><th>Código</th><th>Estado</th><th><span class="vh">Descarga</span></th></tr>
+        <tr><td>Seguridad digital básica</td><td>22 nov 2026</td><td>PEDU-2026-0A7F3C</td><td><span class="estado ok">Emitido</span></td><td><a class="btn sm" href="{{root}}ejemplo/certificado-ejemplo.pdf">Descargar PDF</a></td></tr>
+        <tr><td>Fundamentos de redes</td><td>—</td><td>—</td><td><span class="estado">Pendiente de aprobar</span></td><td></td></tr></table>
         <p class="mut">El PDF de ejemplo es una muestra con datos ficticios.</p></div>
     </section>
 
-    <section class="pm" id="r-ins" aria-labelledby="h-ins">
-      <p class="vl">VISTA DE INSTRUCTOR</p>
+    <section class="pm" id="r-ins" aria-labelledby="h-ins" hidden>
       <h2 id="h-ins" class="titulo2">Mis grupos</h2>
       <div class="panel" id="grupos"><p class="mut">Comparte el código para que tu alumnado se una al curso. La matrícula simbólica la fija el convenio (de 1 € a 5 € por estudiante).</p>
         <table class="t"><tr><th>Centro</th><th>Curso</th><th>Estudiantes</th><th>Matrícula</th><th>Código</th></tr>
         <tr><td>IES Can Rull</td><td>Introducción a la programación</td><td>24</td><td>2 € por estudiante</td><td><b>IES-4K7Q2</b></td></tr>
         <tr><td>CFGM Sistemas</td><td>Fundamentos de redes</td><td>18</td><td>Según tipo de curso</td><td><b>CFG-9M3XA</b></td></tr></table>
         <p class="row"><a class="btn main sm" href="#grupos" data-toast="Código de grupo generado">Generar código</a><a class="btn sm" href="#grupos" data-toast="Curso creado como borrador">Crear curso</a></p></div>
-      <div class="panel"><h2>Mis cursos</h2>
-        <table class="t"><tr><th>Curso</th><th>Modalidad</th><th>Estado</th></tr>
-        <tr><td>Introducción a la programación</td><td>Convenio</td><td><span class="estado ok">Publicado</span></td></tr>
-        <tr><td>Competencia digital para el empleo</td><td>Convenio</td><td><span class="estado">Borrador</span></td></tr></table>
-        <p class="mut">Un instructor también puede cursar como estudiante: cambia de rol arriba.</p></div>
+      <div class="panel"><h2>Resultados del grupo</h2><p class="mut">Aprobados según la nota mínima de cada curso.</p>
+        <table class="t"><tr><th>Grupo</th><th>Nota mínima</th><th>Media del grupo</th><th>Aprobados</th><th>Incidencias de examen</th></tr>
+        <tr><td>IES Can Rull</td><td>50</td><td>71,4</td><td>20 de 24 (83 %)</td><td>3 por revisar</td></tr>
+        <tr><td>CFGM Sistemas</td><td>60</td><td>66,8</td><td>13 de 18 (72 %)</td><td>1 por revisar</td></tr></table></div>
     </section>
   </div>
 </div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="{{root}}js/campus-demo.js" defer></script>

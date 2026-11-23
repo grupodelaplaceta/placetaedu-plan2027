@@ -3,6 +3,8 @@ Formato [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y versionado
 
 ## [Sin publicar]
 ### Añadido
+- Campus virtual de demostración: carrusel de cursos, calendario, notificaciones, calificaciones y entorno de curso con pantalla de carga, todos los tipos de contenido y examen final protegido.
+- Migración `0002_campus.sql` (módulos, notificaciones, alta Cisco, exámenes con claves en servidor, notas ponderadas) y `docs/CAMPUS.md`.
 - Diseño en colores planos (sin degradados ni sombras, con regla de lint), portadas con la roseta original del logo y logo de Cisco Networking Academy.
 - Certificado de muestra en portada y generador de certificados PDF (`scripts/pdf.mjs`) con PDF de ejemplo.
 - Centro de ayuda multipágina (8 páginas) y campus virtual de demostración con vistas de estudiante e instructor.

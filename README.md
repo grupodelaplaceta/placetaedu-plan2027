@@ -10,6 +10,7 @@ Campus online del Departamento de Educación de Grupo de La Placeta: formación 
 - Actividades de teoría, vídeo, imágenes, cuestionarios y laboratorios. Certificados oficiales en PDF.
 - Textos legales para España y la UE (`src/legal/`) y centro de ayuda multipágina (`src/ayuda/`).
 - Certificados PDF: `scripts/pdf.mjs` genera el PDF y `npm run build` crea una muestra en `dist/ejemplo/`.
+- Campus virtual de demostración (`src/demo/`): carrusel de cursos con «+» y código de inscripción, calendario, notificaciones (incluido el alta en Cisco), calificaciones, certificados y entorno de curso con examen protegido. Diseño en `docs/CAMPUS.md`.
 - Diseño: solo colores planos y las imágenes originales de marca (roseta, sello y logo de Cisco) sin modificar.
 
 **Hecho en v0.1.0:** sitio público (inicio, catálogo, textos legales), portadas de curso, cabeceras de seguridad, esquema SQL con RLS (propuesto) y CI.

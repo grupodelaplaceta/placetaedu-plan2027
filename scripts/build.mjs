@@ -23,6 +23,29 @@ export function card(c, root, withId, decor = false) {
     `<p class="precio">${m.precio}</p>${decor ? '' : `<a class="btn sm" href="${root}acceder.html">Empezar</a>`}</div></article>`;
 }
 
+const TIPO = { entrega: 'Entrega', cierre: 'Cierra', examen: 'Examen' };
+export function calendario(cal) {
+  const [y, m] = cal.mes.split('-').map(Number);
+  const dias = new Date(y, m, 0).getDate(), ini = (new Date(y, m - 1, 1).getDay() + 6) % 7; // lunes = 0
+  const ev = (f) => cal.eventos.filter((e) => e.fecha === f);
+  let celdas = '<td class="vacio"></td>'.repeat(ini), n = ini;
+  for (let d = 1; d <= dias; d++) {
+    const f = `${cal.mes}-${String(d).padStart(2, '0')}`, es = ev(f);
+    const cls = [f === cal.hoy ? 'hoy' : '', es.length ? 'con' : ''].join(' ').trim();
+    celdas += `<td${cls ? ` class="${cls}"` : ''}><b>${d}</b>${es.map((e) => `<span class="ev ${e.tipo}">${TIPO[e.tipo]}</span>`).join('')}${f === cal.hoy ? '<span class="vh"> (hoy)</span>' : ''}</td>`;
+    if (++n % 7 === 0 && d < dias) celdas += '</tr><tr>';
+  }
+  celdas += '<td class="vacio"></td>'.repeat((7 - (n % 7)) % 7);
+  const mes = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][m - 1];
+  const dif = (f) => Math.round((new Date(f) - new Date(cal.hoy)) / 864e5);
+  const lista = [...cal.eventos].sort((a, b) => a.fecha.localeCompare(b.fecha)).map((e) => {
+    const d = dif(e.fecha), cuando = d === 0 ? 'hoy' : d === 1 ? 'mañana' : `en ${d} días`;
+    const [yy, mm, dd] = e.fecha.split('-').map(Number);
+    return `<li class="pl ${e.tipo}${d <= 7 ? ' urge' : ''}"><span class="fe"><b>${dd}</b>${['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'][mm - 1]}</span><span><b>${esc(e.titulo)}</b><br><span class="mut">${esc(e.curso)} · ${TIPO[e.tipo]} · ${cuando}</span></span></li>`;
+  }).join('');
+  return `<table class="cal"><caption>${mes[0].toUpperCase() + mes.slice(1)} de ${y}</caption><thead><tr>${['L','M','X','J','V','S','D'].map((x) => `<th scope="col">${x}</th>`).join('')}</tr></thead><tbody><tr>${celdas}</tr></tbody></table><ul class="plazos">${lista}</ul>`;
+}
+
 function parse(raw) {
   const m = raw.match(/^<!--title:\s*(.*?)\s*\|\s*desc:\s*(.*?)(?:\s*\|\s*robots:\s*(.*?))?\s*-->\s*/s);
   if (!m) throw new Error('Falta el comentario title/desc en la pagina');
@@ -33,7 +56,7 @@ export function build() {
   const courses = JSON.parse(readFileSync(join(SRC, 'data/courses.json'), 'utf8'));
   rmSync(DIST, { recursive: true, force: true });
   mkdirSync(join(DIST, 'ejemplo'), { recursive: true });
-  for (const f of ['css', 'img', 'fonts']) if (existsSync(join(SRC, f))) cpSync(join(SRC, f), join(DIST, f), { recursive: true });
+  for (const f of ['css', 'img', 'fonts', 'js']) if (existsSync(join(SRC, f))) cpSync(join(SRC, f), join(DIST, f), { recursive: true });
   writeFileSync(join(DIST, 'ejemplo/certificado-ejemplo.pdf'), certificadoPdf({ nombre: 'Marta Puig Serra', curso: 'Fundamentos de redes', horas: 40, fecha: '2026-11-22', codigo: 'PEDU-2026-0A7F3C', cisco: true, muestra: true }));
   for (const f of ['_headers', 'robots.txt']) if (existsSync(join(SRC, f))) cpSync(join(SRC, f), join(DIST, f));
 
@@ -52,7 +75,7 @@ export function build() {
     const vars = {
       content: p.body, header, footer, title: esc(p.title), description: esc(p.description), robots: esc(p.robots),
       featured: courses.filter((c) => c.featured).map((c) => card(c, root, false)).join(''),
-      hero_cards: heroCards, cert, catalog: courses.map((c) => card(c, root, true)).join('')
+      hero_cards: heroCards, cert, calendar: calendario(JSON.parse(readFileSync(join(SRC, 'data/calendario.json'), 'utf8'))), catalog: courses.map((c) => card(c, root, true)).join('')
     };
     let html = layout;
     // Orden: primero los bloques grandes, despues {{root}} en todo el resultado.
