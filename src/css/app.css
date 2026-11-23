@@ -3,7 +3,7 @@
 @font-face{font-family:"Plus Jakarta Sans";font-weight:400 700;font-display:swap;src:local("Plus Jakarta Sans"),url("../fonts/PlusJakartaSans-Variable.woff2") format("woff2")}
 :root{--ink:#1b0a5e;--deep:#260f5f;--night:#150a45;--peri:#6c75ff;--peri-d:#4a52e0;--bg:#f6f5ff;--card:#fff;--line:#dcdaf5;--mute:#55517a;--ok:#1d7a4f;--cisco:#00a6d6;
 --sans:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--disp:Sora,var(--sans);color-scheme:light}
-@media (prefers-color-scheme:dark){:root{--ink:#efedff;--deep:#1c0f5a;--night:#0b0530;--peri:#8d94ff;--peri-d:#a9aeff;--bg:#0f0838;--card:#1b1058;--line:#37298a;--mute:#b3afdd;--ok:#6fd6a2;color-scheme:dark}}
+
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:88px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
@@ -16,8 +16,8 @@ p{margin:0}a{color:inherit}img{max-width:100%;height:auto}
 /* Menu superior */
 .top{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:2px solid var(--ink)}
 .hbar{display:flex;align-items:center;gap:20px;min-height:72px}
-.logo{height:46px;width:auto;display:block}.logo-d{display:none}
-@media (prefers-color-scheme:dark){.logo-l{display:none}.logo-d{display:block}}
+.logo{height:46px;width:auto;display:block}
+
 .nav{display:flex;gap:4px;margin-left:auto}
 .nav a{padding:9px 15px;border-radius:99px;text-decoration:none;font-weight:600;font-size:.95rem}
 .nav a:hover,.nav a[aria-current]{background:var(--ink);color:var(--bg)}
@@ -115,8 +115,8 @@ details.faq p{margin-top:10px;color:var(--mute);max-width:70ch}
 .aliados{background:var(--card);border-block:2px solid var(--ink)}
 .aliados .wrap{display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap;padding-top:22px;padding-bottom:22px}
 .aliados p{font-weight:600;max-width:46ch}
-.cisco-logo{height:54px;width:auto;display:block}.cisco-d{display:none}
-@media (prefers-color-scheme:dark){.cisco-l{display:none}.cisco-d{display:block}}
+.cisco-logo{height:54px;width:auto;display:block}
+
 .mod .cisco-logo{height:40px}
 /* Certificado de muestra (papel blanco en cualquier tema) */
 .cert{background:#fff;color:#1b0a5e;border:10px solid #260f5f;border-radius:4px;padding:30px 28px 24px;max-width:620px;margin:0 auto;text-align:center;position:relative;outline:2px solid #6c75ff;outline-offset:-22px}

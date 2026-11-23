@@ -2,6 +2,9 @@
 Formato [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y versionado semántico.
 
 ## [Sin publicar]
+### Cambiado
+- El sitio y el campus se muestran siempre en modo claro, con independencia del tema del dispositivo.
+
 ### Añadido
 - Campus virtual de demostración: carrusel de cursos, calendario, notificaciones, calificaciones y entorno de curso con pantalla de carga, todos los tipos de contenido y examen final protegido.
 - Migración `0002_campus.sql` (módulos, notificaciones, alta Cisco, exámenes con claves en servidor, notas ponderadas) y `docs/CAMPUS.md`.
