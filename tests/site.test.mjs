@@ -173,3 +173,18 @@ test('el js de demostracion no usa innerHTML ni eval', () => {
   const j = readFileSync(join(ROOT, 'src/js/campus-demo.js'), 'utf8');
   assert.ok(!/innerHTML|eval\(|document\.write/.test(j));
 });
+
+test('las miniaturas generadas son identicas en catalogo, campus, notificaciones y curso', () => {
+  const cat = html('cursos.html'), campus = html('demo/campus.html'), curso = html('demo/curso.html');
+  const cover = (slug) => cat.match(new RegExp(`id="${slug}"[^>]*>(<div class="cover[\\s\\S]*?</span></div>)`))[1];
+  for (const s of ['fundamentos-de-redes', 'primeros-pasos-con-ia', 'seguridad-digital-basica', 'introduccion-a-la-programacion', 'ciberseguridad-esencial']) {
+    assert.ok(campus.includes(cover(s)), `campus sin la miniatura de ${s}`);
+  }
+  assert.ok(curso.includes(cover('fundamentos-de-redes')));
+  assert.ok(!/cover chico/.test(campus));
+});
+
+test('interfaz de superficies solidas: sin bordes en tarjetas, paneles, campos ni botones', () => {
+  const css = readFileSync(join(DIST, 'css/app.css'), 'utf8').split('Superficie: colores')[1];
+  for (const sel of ['.btn{border:0', '.course,.cover', 'input{border:0', 'fieldset{border:0']) assert.ok(css.includes(sel), sel);
+});

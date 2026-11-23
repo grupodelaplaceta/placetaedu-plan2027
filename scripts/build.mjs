@@ -14,10 +14,12 @@ const MOD = {
   cisco: { tag: 'Cisco NetAcademy', cls: 'cisco', precio: 'Matrícula Cisco: depende del tipo de curso' }
 };
 
+export const coverHtml = (c) => `<div class="cover k-${c.tone}" aria-hidden="true">${glyph(c.glyph)}<span class="rosette"></span></div>`;
+
 export function card(c, root, withId, decor = false) {
   const m = MOD[c.modality];
   return `<article class="course"${withId ? ` id="${esc(c.slug)}"` : ''}>` +
-    `<div class="cover k-${c.tone}" aria-hidden="true">${glyph(c.glyph)}<span class="rosette"></span></div>` +
+    coverHtml(c) +
     `<div class="body"><span class="tag ${m.cls}">${m.tag}</span><h3>${esc(c.title)}</h3><p>${esc(c.summary)}</p>` +
     `<ul class="meta"><li>${c.hours} h orientativas</li><li>Certificado en PDF</li></ul>` +
     `<p class="precio">${m.precio}</p>${decor ? '' : `<a class="btn sm" href="${root}acceder.html">Empezar</a>`}</div></article>`;
@@ -81,6 +83,7 @@ export function build() {
     // Orden: primero los bloques grandes, despues {{root}} en todo el resultado.
     for (const k of ['header', 'footer', 'content']) html = html.replace(`{{${k}}}`, () => vars[k]);
     for (const k of Object.keys(vars)) html = html.split(`{{${k}}}`).join(vars[k]);
+    html = html.replace(/\{\{cover:([a-z0-9-]+)\}\}/g, (_, s) => { const c = courses.find((x) => x.slug === s); if (!c) throw new Error('Curso sin miniatura: ' + s); return coverHtml(c); });
     html = html.split('{{root}}').join(root);
     writeFileSync(join(DIST, file), html);
   }

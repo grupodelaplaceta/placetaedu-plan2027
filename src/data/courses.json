@@ -20,6 +20,16 @@
     "tone": "c"
   },
   {
+    "slug": "python-esencial",
+    "title": "Python esencial",
+    "summary": "Aprende a programar desde cero con Python: variables, decisiones, bucles y funciones con ejercicios guiados.",
+    "modality": "cisco",
+    "hours": 35,
+    "featured": false,
+    "glyph": "code",
+    "tone": "c"
+  },
+  {
     "slug": "primeros-pasos-con-ia",
     "title": "Primeros pasos con IA",
     "summary": "Qué es la inteligencia artificial, cómo usarla en tu día a día y cómo comprobar lo que te responde.",

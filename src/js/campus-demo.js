@@ -34,7 +34,7 @@
     if (!c) { msg.textContent = v.length < 6 ? 'El código tiene al menos 6 caracteres.' : 'Código no válido o caducado. Revísalo con tu centro.'; return; }
     if ($('[data-curso="prog"]')) { msg.textContent = 'Ya estás inscrita en este curso.'; return; }
     var card = el('article', 'tarjeta'); card.setAttribute('data-curso', 'prog');
-    var cv = el('div', 'cover chico ' + c.glyph); cv.appendChild(el('span', 'rosette')); card.appendChild(cv);
+    var tpl = $('#tpl-cover-prog'); if (tpl) card.appendChild(tpl.content.cloneNode(true));
     var body = el('div', 'tb'); body.appendChild(el('span', 'tag conv', 'Con tu centro')); body.appendChild(el('h3', null, c.titulo)); body.appendChild(el('p', 'mut', c.sub));
     var pg = el('progress', 'pg'); pg.value = 0; pg.max = c.total; pg.setAttribute('aria-label', 'Progreso 0 de ' + c.total + ' unidades'); body.appendChild(pg);
     body.appendChild(el('p', 'mut', '0 de ' + c.total + ' unidades'));

@@ -21,17 +21,17 @@
         <div class="row"><h2 class="h2c">Mis cursos</h2><span class="mut">Desliza para ver todos</span></div>
         <div class="carrusel" tabindex="0" role="region" aria-label="Mis cursos, desplazable en horizontal">
           <article class="tarjeta" data-curso="redes">
-            <div class="cover chico k-c" aria-hidden="true"><span class="rosette"></span></div>
+            {{cover:fundamentos-de-redes}}
             <div class="tb"><span class="tag cisco">Cisco NetAcademy</span><h3>Fundamentos de redes</h3><p class="mut">Curso Cisco · IES Can Rull</p>
               <progress class="pg" value="4" max="10" aria-label="Progreso: 4 de 10 unidades"></progress><p class="mut">4 de 10 unidades</p><a class="btn main sm" href="{{root}}demo/curso.html">Entrar</a></div>
           </article>
           <article class="tarjeta" data-curso="ia">
-            <div class="cover chico k-a" aria-hidden="true"><span class="rosette"></span></div>
+            {{cover:primeros-pasos-con-ia}}
             <div class="tb"><span class="tag">Gratis</span><h3>Primeros pasos con IA</h3><p class="mut">Curso abierto</p>
               <progress class="pg" value="15" max="100" aria-label="Progreso: 15 %"></progress><p class="mut">15 %</p><a class="btn sm" href="{{root}}demo/curso.html">Entrar</a></div>
           </article>
           <article class="tarjeta" data-curso="seg">
-            <div class="cover chico k-d" aria-hidden="true"><span class="rosette"></span></div>
+            {{cover:seguridad-digital-basica}}
             <div class="tb"><span class="tag">Gratis</span><h3>Seguridad digital básica</h3><p class="mut">Curso abierto · completado</p>
               <progress class="pg" value="100" max="100" aria-label="Progreso: 100 %"></progress><p class="mut">100 % · aprobado con 88</p><a class="btn sm" href="#mis-certificados">Ver certificado</a></div>
           </article>
@@ -53,12 +53,12 @@
       <div class="panel" id="notificaciones"><div class="row"><h2>Notificaciones</h2><button type="button" class="btn sm" id="leer-todas">Marcar todas como leídas</button></div>
         <p class="mut">PlacetaEDU te avisa del estado de tu alta en Cisco, de tu matrícula y de los plazos.</p>
         <ul class="notifs" id="lista-notif">
-          <li class="notif nueva error"><span class="chip error">Cisco · Error</span><div><b>No hemos podido completar tu alta en Cisco Networking Academy</b><p class="mut">El correo marta.puig@ejemplo.org ya está asociado a otra cuenta en Cisco. Escribe a tu instructor o a soporte indicando este aviso y lo resolvemos. Fecha: 21 nov 2026.</p></div></li>
-          <li class="notif nueva pend"><span class="chip pend">Cisco · Pendiente</span><div><b>Tu alta en «Ciberseguridad esencial» sigue pendiente</b><p class="mut">Solicitada el 20 nov 2026. Cisco aún no la ha confirmado. Te avisaremos aquí en cuanto cambie.</p></div></li>
-          <li class="notif nueva ok"><span class="chip ok">Cisco · Alta confirmada</span><div><b>Ya estás dada de alta en «Fundamentos de redes»</b>
+          <li class="notif nueva error"><span class="mini-cover">{{cover:python-esencial}}</span><span class="chip error">Cisco · Error</span><div><b>No hemos podido completar tu alta en «Python esencial»</b><p class="mut">El correo marta.puig@ejemplo.org ya está asociado a otra cuenta en Cisco Networking Academy. Escribe a tu instructor o a soporte indicando este aviso y lo resolvemos. Fecha: 21 nov 2026.</p></div></li>
+          <li class="notif nueva pend"><span class="mini-cover">{{cover:ciberseguridad-esencial}}</span><span class="chip pend">Cisco · Pendiente</span><div><b>Tu alta en «Ciberseguridad esencial» sigue pendiente</b><p class="mut">Solicitada el 20 nov 2026. Cisco aún no la ha confirmado. Te avisaremos aquí en cuanto cambie.</p></div></li>
+          <li class="notif nueva ok"><span class="mini-cover">{{cover:fundamentos-de-redes}}</span><span class="chip ok">Cisco · Alta confirmada</span><div><b>Ya estás dada de alta en «Fundamentos de redes»</b>
             <dl class="datos"><dt>Usuario</dt><dd>marta.puig@ejemplo.org</dd><dt>Clase</dt><dd>Fundamentos de redes · IES Can Rull</dd><dt>Alta</dt><dd>18 nov 2026</dd><dt>Estado</dt><dd>Activa</dd></dl></div></li>
-          <li class="notif info"><span class="chip info">Matrícula</span><div><b>Tu centro ha abonado tu matrícula</b><p class="mut">IES Can Rull ha pagado tu matrícula simbólica por convenio. No tienes que pagar nada.</p></div></li>
-          <li class="notif ok"><span class="chip ok">Certificado</span><div><b>Tu certificado de «Seguridad digital básica» ya está disponible</b><p class="mut">Descárgalo en PDF desde la sección de certificados.</p></div></li>
+          <li class="notif info"><span class="mini-cover">{{cover:introduccion-a-la-programacion}}</span><span class="chip info">Matrícula</span><div><b>Tu centro ha abonado tu matrícula</b><p class="mut">IES Can Rull ha pagado tu matrícula simbólica por convenio. No tienes que pagar nada.</p></div></li>
+          <li class="notif ok"><span class="mini-cover">{{cover:seguridad-digital-basica}}</span><span class="chip ok">Certificado</span><div><b>Tu certificado de «Seguridad digital básica» ya está disponible</b><p class="mut">Descárgalo en PDF desde la sección de certificados.</p></div></li>
         </ul></div>
 
       <div class="panel" id="calificaciones"><h2>Calificaciones</h2>
@@ -72,8 +72,8 @@
 
       <div class="panel" id="mis-certificados"><h2>Mis certificados</h2>
         <table class="t"><tr><th>Curso</th><th>Fecha</th><th>Código</th><th>Estado</th><th><span class="vh">Descarga</span></th></tr>
-        <tr><td>Seguridad digital básica</td><td>22 nov 2026</td><td>PEDU-2026-0A7F3C</td><td><span class="estado ok">Emitido</span></td><td><a class="btn sm" href="{{root}}ejemplo/certificado-ejemplo.pdf">Descargar PDF</a></td></tr>
-        <tr><td>Fundamentos de redes</td><td>—</td><td>—</td><td><span class="estado">Pendiente de aprobar</span></td><td></td></tr></table>
+        <tr><td><span class="fila-c"><span class="mini-cover">{{cover:seguridad-digital-basica}}</span>Seguridad digital básica</span></td><td>22 nov 2026</td><td>PEDU-2026-0A7F3C</td><td><span class="estado ok">Emitido</span></td><td><a class="btn sm" href="{{root}}ejemplo/certificado-ejemplo.pdf">Descargar PDF</a></td></tr>
+        <tr><td><span class="fila-c"><span class="mini-cover">{{cover:fundamentos-de-redes}}</span>Fundamentos de redes</span></td><td>—</td><td>—</td><td><span class="estado">Pendiente de aprobar</span></td><td></td></tr></table>
         <p class="mut">El PDF de ejemplo es una muestra con datos ficticios.</p></div>
     </section>
 
@@ -91,5 +91,6 @@
     </section>
   </div>
 </div>
+<template id="tpl-cover-prog">{{cover:introduccion-a-la-programacion}}</template>
 <div id="toast" role="status" aria-live="polite"></div>
 <script src="{{root}}js/calificar.js" defer></script><script src="{{root}}js/campus-demo.js" defer></script>
