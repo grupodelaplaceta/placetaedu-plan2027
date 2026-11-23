@@ -1,2 +1,4 @@
+# Cerrado a buscadores hasta completar los textos legales (docs/TECH-DEBT.md, TECH-014).
+# Al publicar de forma definitiva: sustituir por 'Allow: /' y 'Disallow: /acceder.html'.
 User-agent: *
-Disallow: /acceder.html
+Disallow: /

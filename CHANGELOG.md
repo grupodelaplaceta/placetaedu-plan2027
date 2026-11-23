@@ -3,6 +3,7 @@ Formato [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y versionado
 
 ## [Sin publicar]
 ### Cambiado
+- Configuración de despliegue en Vercel (`vercel.json`), Node 22.x, `robots.txt` cerrado hasta publicar y guía en `docs/DEPLOYMENT.md`.
 - Interfaz en superficies de color sólido y sin bordes (el certificado conserva su marco).
 - Las miniaturas de curso salen de una única fuente (`coverHtml`) y son idénticas en catálogo, campus, notificaciones, certificados y curso; prueba automática que lo comprueba.
 - Cuestionarios rehechos: 5 preguntas, aviso si faltan respuestas, explicación de cada una, nota, repetición y unidad completada al aprobar. Examen con banco de 14 preguntas, avance y registro al salir de la pantalla.

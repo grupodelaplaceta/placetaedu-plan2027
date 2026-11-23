@@ -188,3 +188,24 @@ test('interfaz de superficies solidas: sin bordes en tarjetas, paneles, campos n
   const css = readFileSync(join(DIST, 'css/app.css'), 'utf8').split('Superficie: colores')[1];
   for (const sel of ['.btn{border:0', '.course,.cover', 'input{border:0', 'fieldset{border:0']) assert.ok(css.includes(sel), sel);
 });
+
+test('vercel.json: build, salida y cabeceras coherentes con _headers', () => {
+  const v = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8'));
+  assert.equal(v.outputDirectory, 'dist');
+  assert.equal(v.buildCommand, 'npm run build');
+  const todas = v.headers.flatMap((h) => h.headers.map((x) => [x.key, x.value]));
+  const hv = Object.fromEntries(todas);
+  const fichero = readFileSync(join(ROOT, 'src/_headers'), 'utf8');
+  for (const k of ['Content-Security-Policy', 'Strict-Transport-Security', 'X-Content-Type-Options', 'Referrer-Policy', 'Permissions-Policy', 'Cross-Origin-Opener-Policy']) {
+    assert.ok(hv[k], `falta ${k} en vercel.json`);
+    assert.ok(fichero.includes(`${k}: ${hv[k]}`), `${k} difiere entre vercel.json y _headers`);
+  }
+  assert.ok(!/unsafe-(inline|eval)/.test(hv['Content-Security-Policy']));
+  const csp = v.headers.find((h) => h.headers.some((x) => x.key === 'Content-Security-Policy'));
+  assert.ok(csp.source.includes('ejemplo'), 'el PDF de ejemplo debe quedar fuera de la CSP de paginas');
+  assert.equal(JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8')).engines.node, '22.x');
+});
+
+test('robots.txt cierra el sitio a buscadores hasta publicar', () => {
+  assert.match(readFileSync(join(ROOT, 'src/robots.txt'), 'utf8'), /Disallow: \/\s*$/m);
+});

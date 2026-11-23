@@ -13,6 +13,7 @@
 | TECH-010 | Medir LCP/INP/CLS con Lighthouse; no se afirma rendimiento sin medida. | Media | Art. 41 |
 | TECH-015 | Examen real en servidor: banco de preguntas, intentos, tiempo y corrección según `docs/CAMPUS.md`; reautenticación y límites por IP o dispositivo; pruebas de autorización de las funciones `exam_*`. | Alta | Art. 19, 57 |
 | TECH-016 | Proceso de alta en Cisco Networking Academy (cómo se solicita, qué datos devuelve y cómo se notifican los errores). | Alta | Art. 13 |
+| TECH-017 | Primer despliegue en Vercel por una persona autorizada, con protección de previews y comprobación de cabeceras. Decidir región de funciones y de Supabase (UE) para la fase 2. | Alta | Art. 54, 56 |
 | TECH-011 | Integrar PlacetaID (plid26, `id.laplaceta.org`): alta como solicitante, `client_id`, `redirect_uri` y uso del DIP como identidad. | Alta | Art. 14 |
 | TECH-012 | Exponer la API que Placeta Joven espera de PlacetaEDU (`GET /pathways`; PlacetaEDU es la fuente de verdad de cursos, actividades, progreso y certificados). | Media | Art. 13 |
 | TECH-013 | Recompensas en Pz y becas sobre la matrícula: dependen de Banco de La Placeta y RSP. Al activarlas, reevaluar a nivel 3 (ADR 0002). | Alta | Art. 6 |

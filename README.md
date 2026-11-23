@@ -35,6 +35,9 @@ Para verlo en local: sirve `dist/` con cualquier servidor estático.
 | `npm test` | Pruebas (`node:test`): estructura, accesibilidad básica, legal, CSP, RLS |
 | `npm run check` | Los tres anteriores |
 
+## Despliegue
+Vercel (`vercel.json`): preview desde `devai`, producción desde `main`. Pasos y condiciones en `docs/DEPLOYMENT.md`.
+
 ## Variables de entorno
 Solo nombres, en `.env.example`: `PUBLIC_SUPABASE_URL`, `PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (solo servidor), `PAYMENT_PROVIDER_WEBHOOK_SECRET`. La fase 1 no las usa.
 

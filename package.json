@@ -5,8 +5,13 @@
   "description": "PlacetaEDU: campus online del Departamento de Educación de Grupo de La Placeta",
   "license": "UNLICENSED",
   "type": "module",
-  "engines": { "node": ">=22" },
-  "browserslist": ["defaults and fully supports es6-module", "last 2 years"],
+  "engines": {
+    "node": "22.x"
+  },
+  "browserslist": [
+    "defaults and fully supports es6-module",
+    "last 2 years"
+  ],
   "scripts": {
     "lint": "node scripts/lint.mjs",
     "test": "node --test tests/*.test.mjs",
